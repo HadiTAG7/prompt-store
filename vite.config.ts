@@ -11,6 +11,16 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          icons: ['@phosphor-icons/react'],
+          vendor: ['react', 'react-dom', 'react-router', 'react-hook-form', 'zod'],
+        },
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
