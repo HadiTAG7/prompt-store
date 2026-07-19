@@ -44,6 +44,8 @@ export interface DraftRepository {
 }
 
 export interface AppRepositories {
+  /** مصدر التخزين الحالي — يظهر في الإعدادات */
+  readonly kind: 'local' | 'firebase';
   workflows: EntityRepository<Workflow>;
   prompts: EntityRepository<PromptItem>;
   categories: EntityRepository<Category>;

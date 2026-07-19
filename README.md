@@ -8,8 +8,13 @@ An Arabic-first, RTL web app for building **reusable prompt workflows**: ordered
 `{{variable}}` templates, a focused run mode that resolves prompts with your values, tracks
 progress, and stores everything locally.
 
-النسخة الأولى **محلية بالكامل**: بلا تسجيل دخول، بلا خادم، بلا مفاتيح API — البيانات تُحفظ في
-`localStorage` خلف طبقة مستودعات قابلة للاستبدال بـ Supabase لاحقًا.
+يعمل التطبيق بوضعين خلف طبقة مستودعات واحدة:
+
+- **محلي (افتراضي)**: بلا تسجيل دخول، بلا خادم، بلا مفاتيح — البيانات في `localStorage`.
+- **سحابي (Firebase)**: عند ضبط متغيرات `VITE_FIREBASE_*` تُحفظ البيانات في **Cloud Firestore**
+  بمصادقة مجهولة، مع نقل بياناتك المحلية إلى السحابة تلقائيًا مرة واحدة.
+
+النشر المستهدف: **Vercel** للاستضافة + **Firebase** للبيانات (انظر قسم «النشر» أدناه).
 
 ---
 
@@ -73,9 +78,14 @@ src/
 
 ## التخزين — Storage
 
-الواجهة **لا تلمس `localStorage` مباشرة أبدًا** — كل شيء يمر عبر واجهات في
-`src/data/repositories/types.ts` (Promise-based)، والتنفيذ المحلي في
-`localStorageRepositories.ts` فوق `StorageAdapter`.
+الواجهة **لا تلمس التخزين مباشرة أبدًا** — كل شيء يمر عبر واجهات في
+`src/data/repositories/types.ts` (Promise-based)، ولها تنفيذان:
+
+- `localStorageRepositories.ts` — الوضع المحلي فوق `StorageAdapter` (الافتراضي).
+- `firestoreRepositories.ts` — وضع Firebase: بيانات كل مستخدم تحت `users/{uid}/…` في
+  Firestore، بمصادقة مجهولة وتخزين مؤقت دائم متعدد التبويبات (يعمل دون اتصال بعد أول تحميل).
+  يُفعَّل تلقائيًا عند وجود متغيرات `VITE_FIREBASE_*`، وتُهاجَر البيانات المحلية إلى السحابة
+  مرة واحدة عند أول دخول.
 
 مفاتيح التخزين (مفتاح لكل كيان):
 
@@ -116,18 +126,72 @@ ps:drafts      مسودات المحرر بالحفظ التلقائي
   المستورد (وفي النسخة الكاملة يُعاد ربط مراجع التشغيلات بالخطوات الجديدة). الاستيراد الكامل
   **دمج** فوق بياناتك الحالية.
 
-## استبدال التخزين بـ Supabase لاحقًا
+## النشر — Deployment (Vercel + Firebase)
 
-الواجهة تعتمد حصريًا على واجهات `AppRepositories` غير المتزامنة، لذا الاستبدال محصور في طبقة
-واحدة:
+### ١) تجهيز Firebase
 
-1. أنشئ `src/data/repositories/supabaseRepositories.ts` ينفّذ نفس الواجهات
-   (`EntityRepository<Workflow>`, `RunRepository`, `SettingsRepository`, …) فوق جداول Supabase.
-2. في `src/main.tsx` استبدل `createLocalRepositories(adapter)` بمصنع Supabase (يمكن الإبقاء على
-   المحلي كوضع دون اتصال).
-3. لا تغيير في أي مكوّن واجهة — المخازن التفاعلية والخطافات تبقى كما هي.
-4. حوّل منطق توليد المعرفات عند التعارض إلى قيود قاعدة البيانات إن رغبت، وأبقِ غلاف
-   التصدير/الاستيراد نفسه للتوافق.
+1. أنشئ مشروعًا في [Firebase Console](https://console.firebase.google.com) ثم أضف **تطبيق ويب**
+   (أيقونة `</>`), وانسخ قيم الإعداد (apiKey, authDomain, projectId, …).
+2. **المصادقة**: من *Build ← Authentication ← Sign-in method* فعّل مزوّد **Anonymous**.
+   (كل زائر يحصل على هوية مجهولة ثابتة لمتصفحه، وبياناته معزولة تحت `users/{uid}`).
+3. **قاعدة البيانات**: من *Build ← Firestore Database* أنشئ قاعدة بيانات (وضع الإنتاج).
+4. **قواعد الأمان**: انسخ محتوى [`firestore.rules`](firestore.rules) في تبويب *Rules* وانشره،
+   أو عبر سطر الأوامر:
+
+   ```bash
+   npm i -g firebase-tools
+   firebase login
+   firebase use <project-id>
+   firebase deploy --only firestore:rules
+   ```
+
+### ٢) التشغيل محليًا على Firebase (اختياري)
+
+```bash
+cp .env.example .env.local   # ثم عبّئ قيم VITE_FIREBASE_* من إعدادات تطبيق الويب
+npm run dev
+```
+
+ستجد في الإعدادات: «مصدر التخزين الحالي: سحابة Firebase». عند أول تشغيل تُنقل بياناتك
+المحلية (أو بيانات البذر) إلى Firestore مرة واحدة.
+
+### ٣) النشر على Vercel
+
+عبر لوحة Vercel:
+
+1. **Add New → Project** واستورد مستودع `prompt-store` من GitHub.
+2. Vercel يكتشف Vite تلقائيًا (build: `npm run build`، output: `dist`) —
+   وملف [`vercel.json`](vercel.json) يضبط إعادة التوجيه لتطبيق الصفحة الواحدة.
+3. في *Settings → Environment Variables* أضف متغيرات `VITE_FIREBASE_*` الستة ثم **Deploy**.
+
+أو عبر سطر الأوامر:
+
+```bash
+npm i -g vercel
+vercel                      # ربط المشروع أول مرة
+vercel env add VITE_FIREBASE_API_KEY   # كرر لبقية المتغيرات (أو أضفها من اللوحة)
+vercel --prod
+```
+
+4. **بعد أول نشر**: أضف نطاق Vercel (مثل `your-app.vercel.app`) إلى
+   *Authentication ← Settings ← Authorized domains* في Firebase.
+
+ملاحظات:
+
+- بدون متغيرات البيئة يعمل الموقع المنشور بالوضع المحلي (localStorage لكل زائر) — وهذا وضع
+  صالح تمامًا أيضًا.
+- إذا تعذر الوصول إلى Firebase عند الإقلاع (انقطاع، إعداد ناقص) يعود التطبيق تلقائيًا للوضع
+  المحلي بدل أن يتعطل.
+- المصادقة المجهولة تعني أن الهوية مرتبطة بالمتصفح؛ للمزامنة عبر الأجهزة يمكن لاحقًا ربط
+  الحساب بمزوّد Google عبر `linkWithPopup` دون فقدان البيانات — البنية جاهزة لذلك.
+
+## استبدال طبقة التخزين بخلفية أخرى
+
+الواجهة تعتمد حصريًا على واجهات `AppRepositories` غير المتزامنة
+(`src/data/repositories/types.ts`)، وتنفيذ Firestore في
+[`firestoreRepositories.ts`](src/data/repositories/firestoreRepositories.ts) نموذج جاهز:
+لاستخدام Supabase أو أي خلفية أخرى نفّذ الواجهات نفسها واستبدل المصنع في `src/main.tsx` —
+لا تغيير في أي مكوّن واجهة.
 
 ## مراجع التصميم — Design References
 

@@ -1,6 +1,8 @@
 import { useRef, useState, type ReactNode } from 'react';
 import {
+  CloudCheck,
   DownloadSimple,
+  HardDrives,
   Moon,
   Sun,
   Monitor,
@@ -246,6 +248,20 @@ export function SettingsPage() {
       </SettingsCard>
 
       <SettingsCard title="النسخ الاحتياطي والاستعادة">
+        <div className="flex items-center gap-2 text-[13px]">
+          <span className="text-ink-medium">مصدر التخزين الحالي:</span>
+          {repositories.kind === 'firebase' ? (
+            <span className="inline-flex items-center gap-1.5 font-medium text-success">
+              <CloudCheck size={15} weight="fill" aria-hidden />
+              سحابة Firebase (Firestore)
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 font-medium text-ink">
+              <HardDrives size={15} aria-hidden />
+              محلي على هذا الجهاز
+            </span>
+          )}
+        </div>
         <p className="m-0 text-[13.5px] leading-5 text-ink-medium">
           التصدير ينتج ملف JSON واحدًا يشمل كل شيء. الاستيراد «دمج» — لا يمسح بياناتك الحالية،
           والعناصر المتعارضة تُستورد بمعرّفات جديدة.

@@ -27,7 +27,22 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- شاشة انتظار أثناء الإقلاع (تهيئة Firebase عند تفعيلها) — تُستبدل عند العرض -->
+      <div
+        style="
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: system-ui, sans-serif;
+          font-size: 15px;
+          color: #6d7279;
+        "
+      >
+        جارٍ التحميل…
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

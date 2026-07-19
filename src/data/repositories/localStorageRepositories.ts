@@ -6,9 +6,8 @@ import type {
   Workflow,
   WorkflowRun,
 } from '@/types';
-import { DEFAULT_SETTINGS } from '@/types';
-import { appSettingsSchema } from '@/lib/schemas';
 import { STORAGE_KEYS, type StorageKey, type StorageMeta } from '../storage/keys';
+import { mergeSettings } from './settingsMerge';
 import type { StorageAdapter } from '../storage/storageAdapter';
 import { CURRENT_SCHEMA_VERSION } from '../storage/migrations';
 import type {
@@ -77,16 +76,7 @@ class LocalSettingsRepository implements SettingsRepository {
   constructor(private storage: StorageAdapter) {}
 
   async get(): Promise<AppSettings> {
-    const stored = this.storage.read<Partial<AppSettings>>(STORAGE_KEYS.settings);
-    if (!stored) return DEFAULT_SETTINGS;
-    // دمج جزئي فوق الافتراضيات — إضافة إعداد جديد لاحقًا لا تتطلب ترحيلًا
-    const merged: AppSettings = {
-      ...DEFAULT_SETTINGS,
-      ...stored,
-      confirmations: { ...DEFAULT_SETTINGS.confirmations, ...(stored.confirmations ?? {}) },
-    };
-    const parsed = appSettingsSchema.safeParse(merged);
-    return parsed.success ? parsed.data : DEFAULT_SETTINGS;
+    return mergeSettings(this.storage.read<Partial<AppSettings>>(STORAGE_KEYS.settings));
   }
 
   async save(settings: AppSettings): Promise<AppSettings> {
@@ -122,6 +112,7 @@ class LocalDraftRepository implements DraftRepository {
 }
 
 class LocalAppRepositories implements AppRepositories {
+  readonly kind = 'local' as const;
   workflows: EntityRepository<Workflow>;
   prompts: EntityRepository<PromptItem>;
   categories: EntityRepository<Category>;
