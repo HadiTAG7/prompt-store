@@ -1,0 +1,98 @@
+/* رموز التصميم — منقولة من نظام تصميم Abyan Capital (انظر design-references/tokens).
+   القيم أدناه هي القيم المحلولة للوضعين الفاتح والداكن. */
+:root {
+  /* الهوية */
+  --ab-primary: rgb(54, 70, 232);
+  --ab-on-primary: rgb(255, 255, 255);
+  --ab-primary-container: rgb(209, 221, 255);
+  --ab-on-primary-container: rgb(10, 0, 92);
+  --ab-secondary: rgb(0, 99, 183);
+  --ab-on-secondary: rgb(255, 255, 255);
+  --ab-secondary-container: rgb(199, 225, 255);
+  --ab-on-secondary-container: rgb(0, 26, 57);
+
+  /* الدلالات */
+  --ab-success: rgb(31, 116, 87);
+  --ab-success-container: rgb(168, 240, 209);
+  --ab-danger: rgb(178, 36, 50);
+  --ab-danger-container: rgb(255, 209, 206);
+  --ab-gold: rgb(182, 156, 82);
+  --ab-gold-container: rgb(246, 220, 151);
+
+  /* الأسطح والنصوص */
+  --ab-surface: rgb(245, 249, 254);
+  --ab-surface-container-lowest: rgb(255, 255, 255);
+  --ab-surface-container-low: rgb(236, 242, 251);
+  --ab-surface-container: rgb(229, 236, 245);
+  --ab-surface-container-high: rgb(222, 229, 239);
+  --ab-surface-container-highest: rgb(215, 223, 233);
+  --ab-on-surface: rgb(23, 27, 32);
+  --ab-on-surface-medium: rgb(67, 72, 78);
+  --ab-on-surface-low: rgb(109, 114, 121);
+  --ab-outline: rgb(185, 190, 198);
+  --ab-outline-variant: rgb(215, 223, 233);
+  --ab-inverse-surface: rgb(42, 46, 52);
+  --ab-inverse-on-surface: rgb(233, 239, 247);
+  --ab-scrim: rgba(23, 27, 32, 0.45);
+
+  /* ألوان التنبيهات فوق السطح المعكوس */
+  --ab-toast-success: #7bd8b0;
+  --ab-toast-error: #f2a0a8;
+
+  /* الزوايا */
+  --ab-radius-xs: 4px;
+  --ab-radius-sm: 8px;
+  --ab-radius-md: 12px;
+  --ab-radius-lg: 16px;
+  --ab-radius-xl: 20px;
+  --ab-radius-full: 9999px;
+
+  /* الظلال */
+  --ab-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --ab-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --ab-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+
+  /* الخط */
+  --font-family-base: 'Rubik Variable', 'Rubik', 'Cairo', system-ui, -apple-system, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+:root[data-theme='dark'] {
+  --ab-primary: rgb(164, 187, 255);
+  --ab-on-primary: rgb(22, 0, 142);
+  --ab-primary-container: rgb(36, 35, 191);
+  --ab-on-primary-container: rgb(209, 221, 255);
+  --ab-secondary: rgb(141, 194, 255);
+  --ab-on-secondary: rgb(0, 46, 90);
+  --ab-secondary-container: rgb(0, 71, 136);
+  --ab-on-secondary-container: rgb(199, 225, 255);
+
+  --ab-success: rgb(105, 214, 172);
+  --ab-success-container: rgb(0, 86, 61);
+  --ab-danger: rgb(255, 159, 156);
+  --ab-danger-container: rgb(138, 0, 27);
+  --ab-gold: rgb(246, 220, 151);
+  --ab-gold-container: rgb(87, 70, 17);
+
+  --ab-surface: rgb(16, 20, 25);
+  --ab-surface-container-lowest: rgb(10, 14, 18);
+  --ab-surface-container-low: rgb(23, 27, 32);
+  --ab-surface-container: rgb(27, 32, 37);
+  --ab-surface-container-high: rgb(37, 41, 47);
+  --ab-surface-container-highest: rgb(47, 51, 57);
+  --ab-on-surface: rgb(215, 223, 233);
+  --ab-on-surface-medium: rgb(185, 190, 198);
+  --ab-on-surface-low: rgb(123, 129, 135);
+  --ab-outline: rgb(67, 72, 78);
+  --ab-outline-variant: rgb(42, 46, 52);
+  --ab-inverse-surface: rgb(215, 223, 233);
+  --ab-inverse-on-surface: rgb(42, 46, 52);
+  --ab-scrim: rgba(0, 0, 0, 0.55);
+
+  --ab-toast-success: rgb(0, 100, 70);
+  --ab-toast-error: rgb(150, 20, 35);
+
+  --ab-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ab-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --ab-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+}

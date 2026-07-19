@@ -1,0 +1,169 @@
+@import '@fontsource-variable/rubik';
+@import './tokens.css';
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+  --color-*: initial;
+  --color-primary: var(--ab-primary);
+  --color-on-primary: var(--ab-on-primary);
+  --color-primary-container: var(--ab-primary-container);
+  --color-on-primary-container: var(--ab-on-primary-container);
+  --color-secondary: var(--ab-secondary);
+  --color-on-secondary: var(--ab-on-secondary);
+  --color-secondary-container: var(--ab-secondary-container);
+  --color-on-secondary-container: var(--ab-on-secondary-container);
+  --color-success: var(--ab-success);
+  --color-success-container: var(--ab-success-container);
+  --color-danger: var(--ab-danger);
+  --color-danger-container: var(--ab-danger-container);
+  --color-gold: var(--ab-gold);
+  --color-gold-container: var(--ab-gold-container);
+  --color-surface: var(--ab-surface);
+  --color-card: var(--ab-surface-container-lowest);
+  --color-container-low: var(--ab-surface-container-low);
+  --color-container: var(--ab-surface-container);
+  --color-container-high: var(--ab-surface-container-high);
+  --color-container-highest: var(--ab-surface-container-highest);
+  --color-ink: var(--ab-on-surface);
+  --color-ink-medium: var(--ab-on-surface-medium);
+  --color-ink-low: var(--ab-on-surface-low);
+  --color-outline: var(--ab-outline);
+  --color-line: var(--ab-outline-variant);
+  --color-inverse-surface: var(--ab-inverse-surface);
+  --color-inverse-ink: var(--ab-inverse-on-surface);
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  --font-sans: var(--font-family-base);
+
+  --radius-xs: var(--ab-radius-xs);
+  --radius-sm: var(--ab-radius-sm);
+  --radius-md: var(--ab-radius-md);
+  --radius-lg: var(--ab-radius-lg);
+  --radius-xl: var(--ab-radius-xl);
+
+  --shadow-soft-sm: var(--ab-shadow-sm);
+  --shadow-soft-md: var(--ab-shadow-md);
+  --shadow-soft-lg: var(--ab-shadow-lg);
+}
+
+@layer base {
+  html {
+    direction: rtl;
+  }
+
+  body {
+    margin: 0;
+    background: var(--ab-surface);
+    color: var(--ab-on-surface);
+    font-family: var(--font-family-base);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  ::placeholder {
+    color: var(--ab-on-surface-low);
+    opacity: 1;
+  }
+
+  a {
+    color: var(--ab-primary);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--ab-secondary);
+  }
+
+  /* حلقة تركيز لوحة المفاتيح — من عينات نظام التصميم */
+  :focus-visible {
+    outline: 3px solid var(--ab-secondary);
+    outline-offset: 1px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+    border-color: transparent !important;
+    box-shadow: inset 0 0 0 3px var(--ab-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes ab-shimmer {
+    0% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.55;
+    }
+  }
+
+  @keyframes ab-toast {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 8px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @keyframes ab-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-shimmer {
+    animation: ab-shimmer 1.4s ease-in-out infinite;
+  }
+
+  .animate-toast {
+    animation: ab-toast 160ms ease;
+  }
+
+  .animate-fade-in {
+    animation: ab-fade-in 120ms ease;
+  }
+
+  .clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
