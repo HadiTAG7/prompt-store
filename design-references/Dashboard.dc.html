@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/styles.css">
+<script src="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>html{direction:rtl} body{margin:0;background:var(--ab-surface);font-family:var(--font-family-base)} a{color:var(--ab-primary);text-decoration:none} a:hover{color:var(--ab-secondary)} *{box-sizing:border-box} ::placeholder{color:var(--ab-on-surface-low)}</style>
+</helmet>
+<div dir="rtl" data-screen-label="لوحة التحكم" style="display:flex;min-height:100vh;align-items:stretch">
+  <dc-import name="Sidebar" active="dashboard" hint-size="264px,900px" style="flex:none"></dc-import>
+  <main style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <header style="height:64px;background:var(--ab-surface-container-lowest);border-bottom:1px solid var(--ab-outline-variant);display:flex;align-items:center;gap:12px;padding:0 32px;flex:none;position:sticky;top:0;z-index:5">
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.SearchField" placeholder="ابحث في المسارات والبرومبتات" style="width:400px;height:40px" hint-size="400px,40px"></x-import>
+      <span style="flex:1"></span>
+      <button title="إنشاء سريع" style="width:40px;height:40px;border-radius:9999px;border:none;background:var(--ab-primary-container);color:var(--ab-on-primary-container);display:inline-flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--ab-secondary-container)"><i class="ph ph-plus" style="font-size:20px"></i></button>
+      <button title="المظهر الداكن" style="width:40px;height:40px;border-radius:9999px;border:none;background:transparent;color:var(--ab-on-surface-medium);display:inline-flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--ab-surface-container)"><i class="ph ph-moon" style="font-size:20px"></i></button>
+      <span style="width:1px;height:24px;background:var(--ab-outline-variant)"></span>
+      <button style="display:flex;align-items:center;gap:8px;border:none;background:transparent;padding:4px;border-radius:9999px;cursor:pointer" style-hover="background:var(--ab-surface-container)">
+        <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Avatar" type="initials" initials="س" size="sm" hint-size="32px,32px"></x-import>
+        <i class="ph ph-caret-down" style="font-size:14px;color:var(--ab-on-surface-low)"></i>
+      </button>
+    </header>
+    <div style="padding:32px;display:flex;flex-direction:column;gap:24px;max-width:1240px;width:100%;margin:0 auto">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div>
+          <h1 style="margin:0;font-size:28px;line-height:40px;font-weight:700;color:var(--ab-on-surface)">مرحبًا، لنبدأ العمل</h1>
+          <p style="margin:4px 0 0;font-size:16px;line-height:28px;color:var(--ab-on-surface-medium)">أنشئ مسارات منظمة وحوّل المهام المعقدة إلى خطوات واضحة.</p>
+        </div>
+        <div style="display:flex;gap:12px">
+          <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="استيراد مسار" size="medium" variant="neutral" emphasis="high" leading-icon="tray-arrow-down" hint-size="auto,40px"></x-import>
+          <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="إنشاء مسار جديد" size="medium" leading-icon="plus" hint-size="auto,40px"></x-import>
+        </div>
+      </div>
+      <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:24px;min-width:0;flex:1 1 560px">
+          <section aria-label="متابعة من حيث توقفت" style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <span style="width:48px;height:48px;border-radius:12px;background:var(--ab-primary-container);display:inline-flex;align-items:center;justify-content:center;flex:none"><i class="ph-fill ph-file-text" style="font-size:24px;color:var(--ab-on-primary-container)"></i></span>
+            <div style="flex:1;min-width:220px">
+              <div style="font-size:12px;line-height:20px;font-weight:500;color:var(--ab-primary)">متابعة من حيث توقفت</div>
+              <div style="font-size:17px;font-weight:600;color:var(--ab-on-surface)"><a href="Workflow Details.dc.html" style="color:inherit">بناء تقرير تنفيذي</a></div>
+              <div style="font-size:13.5px;line-height:20px;color:var(--ab-on-surface-medium)">الخطوة ٣ من ١٠ — تحديد هيكل التقرير</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;min-width:200px;flex:1">
+              <div style="flex:1;height:8px;border-radius:9999px;background:var(--ab-surface-container);overflow:hidden"><div style="width:30%;height:100%;border-radius:9999px;background:var(--ab-primary)"></div></div>
+              <span style="font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">٣٠٪</span>
+            </div>
+            <a href="Run Workflow.dc.html"><x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="متابعة المسار" size="medium" trailing-icon="arrow-left" hint-size="auto,40px"></x-import></a>
+          </section>
+          <section aria-label="المسارات الأخيرة" style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;overflow:hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--ab-outline-variant)">
+              <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">المسارات الأخيرة</h2>
+              <a href="Workflows.dc.html" style="font-size:13.5px;font-weight:500">عرض الكل</a>
+            </div>
+            <sc-for list="{{ recent }}" as="w" hint-placeholder-count="4">
+              <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--ab-outline-variant)" style-hover="background:var(--ab-surface)">
+                <span style="width:40px;height:40px;border-radius:10px;background:var(--ab-surface-container);display:inline-flex;align-items:center;justify-content:center"><i class="{{ w.iconCls }}" style="font-size:20px;color:var(--ab-on-surface-medium)"></i></span>
+                <div style="min-width:180px;flex:1 1 200px">
+                  <div style="font-size:15px;font-weight:600;color:var(--ab-on-surface);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px"><a href="Workflow Details.dc.html" style="color:inherit">{{ w.title }}</a></div>
+                  <div style="font-size:13px;line-height:18px;color:var(--ab-on-surface-low);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px">{{ w.desc }}</div>
+                </div>
+                <span style="font-size:13px;color:var(--ab-on-surface-medium);display:inline-flex;align-items:center;gap:6px;white-space:nowrap"><i class="ph ph-list-numbers" style="font-size:16px;color:var(--ab-on-surface-low)"></i>{{ w.steps }}</span>
+                <span><span style="font-size:12px;line-height:20px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium);white-space:nowrap">{{ w.cat }}</span></span>
+                <span style="font-size:12.5px;color:var(--ab-on-surface-low);white-space:nowrap">{{ w.updated }}</span>
+                <span><span style="font-size:12px;line-height:20px;font-weight:500;padding:2px 10px;border-radius:9999px;background:{{ w.stBg }};color:{{ w.stFg }};display:inline-flex;align-items:center;gap:4px;white-space:nowrap"><i class="{{ w.stIcon }}" style="font-size:12px"></i>{{ w.status }}</span></span>
+                <button title="إضافة إلى المفضلة" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:{{ w.starFg }}" style-hover="background:var(--ab-surface-container)"><i class="{{ w.starCls }}" style="font-size:18px"></i></button>
+                <a href="Workflow Details.dc.html" style="font-size:13px;font-weight:500;color:var(--ab-primary);border:1px solid var(--ab-outline-variant);border-radius:8px;height:32px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px" style-hover="background:var(--ab-primary-container);color:var(--ab-on-primary-container)">فتح</a>
+              </div>
+            </sc-for>
+          </section>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:24px;flex:1 1 300px;max-width:360px;min-width:280px">
+          <section aria-label="المسارات المفضلة" style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;gap:4px">
+            <h2 style="margin:0 0 8px;font-size:17px;font-weight:600;color:var(--ab-on-surface)">المسارات المفضلة</h2>
+            <sc-for list="{{ favorites }}" as="f" hint-placeholder-count="2">
+              <a href="Workflow Details.dc.html" style="display:flex;align-items:center;gap:12px;padding:10px 8px;margin:0 -8px;border-radius:12px;color:inherit" style-hover="background:var(--ab-surface)">
+                <i class="ph-fill ph-star" style="font-size:18px;color:var(--ab-gold);flex:none"></i>
+                <span style="flex:1;min-width:0">
+                  <span style="display:block;font-size:14px;font-weight:500;color:var(--ab-on-surface)">{{ f.title }}</span>
+                  <span style="display:block;font-size:12.5px;color:var(--ab-on-surface-low)">{{ f.meta }}</span>
+                </span>
+                <i class="ph ph-caret-left" style="font-size:14px;color:var(--ab-on-surface-low)"></i>
+              </a>
+            </sc-for>
+          </section>
+          <section aria-label="آخر عمليات التشغيل" style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:16px 20px;display:flex;flex-direction:column">
+            <h2 style="margin:0 0 8px;font-size:17px;font-weight:600;color:var(--ab-on-surface)">آخر عمليات التشغيل</h2>
+            <sc-for list="{{ runs }}" as="r" hint-placeholder-count="3">
+              <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--ab-outline-variant)">
+                <span style="width:8px;height:8px;border-radius:9999px;background:{{ r.dot }};margin-top:6px;flex:none"></span>
+                <span style="flex:1;min-width:0">
+                  <span style="display:block;font-size:14px;font-weight:500;color:var(--ab-on-surface)">{{ r.title }}</span>
+                  <span style="display:block;font-size:12.5px;line-height:18px;color:var(--ab-on-surface-medium)">{{ r.note }}</span>
+                </span>
+                <span style="font-size:12px;color:var(--ab-on-surface-low);flex:none">{{ r.time }}</span>
+              </div>
+            </sc-for>
+            <a href="Run Workflow.dc.html" style="font-size:13px;font-weight:500;margin-top:10px">سجل التشغيل الكامل</a>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const st = {
+      running: { status: 'قيد التنفيذ', stBg: 'var(--ab-primary-container)', stFg: 'var(--ab-on-primary-container)', stIcon: 'ph-fill ph-circle-half' },
+      done: { status: 'مكتمل', stBg: 'var(--ab-success-container)', stFg: 'var(--ab-success)', stIcon: 'ph-fill ph-check-circle' },
+      idle: { status: 'لم يبدأ', stBg: 'var(--ab-surface-container)', stFg: 'var(--ab-on-surface-medium)', stIcon: 'ph ph-circle' },
+    };
+    const star = (on) => ({ starCls: on ? 'ph-fill ph-star' : 'ph ph-star', starFg: on ? 'var(--ab-gold)' : 'var(--ab-on-surface-low)' });
+    const recent = [
+      Object.assign({ iconCls: 'ph ph-file-text', title: 'بناء تقرير تنفيذي', desc: 'تحويل المدخلات الأولية إلى تقرير تنفيذي منظم وقابل للتسليم', steps: '١٠ خطوات', cat: 'التقارير', updated: 'قبل ساعتين' }, st.running, star(true)),
+      Object.assign({ iconCls: 'ph ph-chart-bar', title: 'تحليل منافسين', desc: 'مقارنة شاملة للمنافسين الرئيسيين مع خلاصة تنفيذية', steps: '٨ خطوات', cat: 'التحليل', updated: 'أمس' }, st.done, star(true)),
+      Object.assign({ iconCls: 'ph ph-presentation-chart', title: 'إعداد عرض تقديمي', desc: 'بناء عرض مقنع من الفكرة إلى الشرائح النهائية', steps: '١٢ خطوة', cat: 'العروض التقديمية', updated: 'قبل ٣ أيام' }, st.idle, star(false)),
+      Object.assign({ iconCls: 'ph ph-article', title: 'كتابة دراسة حالة', desc: 'توثيق قصة نجاح عميل بأسلوب قصصي مهني', steps: '٧ خطوات', cat: 'الكتابة', updated: 'قبل أسبوع' }, st.running, star(false)),
+    ];
+    return {
+      recent,
+      favorites: [
+        { title: 'بناء تقرير تنفيذي', meta: '١٠ خطوات · التقارير' },
+        { title: 'تحليل منافسين', meta: '٨ خطوات · التحليل' },
+        { title: 'ملخص بحث سوقي', meta: '٦ خطوات · البحث' },
+      ],
+      runs: [
+        { title: 'تحليل منافسين', note: 'اكتمل التشغيل — ٨ من ٨ خطوات', time: 'أمس', dot: 'var(--ab-success)' },
+        { title: 'بناء تقرير تنفيذي', note: 'توقف عند الخطوة ٣ — تحديد هيكل التقرير', time: 'قبل ساعتين', dot: 'var(--ab-primary)' },
+        { title: 'كتابة دراسة حالة', note: 'توقف عند الخطوة ٤ — صياغة التحدي', time: 'قبل أسبوع', dot: 'var(--ab-gold)' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

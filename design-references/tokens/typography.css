@@ -1,0 +1,35 @@
+/* Abyan Capital — Typography.
+   Primary typeface: Rubik (Latin + Arabic). The source .fig ships no font
+   binaries, so Rubik is loaded from Google Fonts (exact family match).
+   Arabic UI copy uses the same family; SF Pro / Inter appear only in iOS
+   status-bar chrome and emoji glyphs and are not part of the brand type. */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  --font-family-base: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-arabic: 'Rubik', 'Cairo', 'Alexandria', system-ui, sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Type scale — size / line-height pairs transcribed from the source. */
+  --type-display-size: 32px;   --type-display-line: 40px;   --type-display-weight: 700;
+  --type-title-size: 28px;     --type-title-line: 48px;     --type-title-weight: 700;
+  --type-heading-size: 24px;   --type-heading-line: 40px;   --type-heading-weight: 400;
+  --type-button-size: 18px;    --type-button-line: 32px;    --type-button-weight: 500;
+  --type-body-size: 16px;      --type-body-line: 28px;      --type-body-weight: 400;
+  --type-body-strong-weight: 500;
+  --type-callout-size: 14px;   --type-callout-line: 20px;   --type-callout-weight: 500;
+  --type-label-size: 12px;     --type-label-line: 20px;     --type-label-weight: 400;
+  --type-label-strong-weight: 500;
+}
+
+/* Reusable text-style classes (optional convenience). */
+.ab-display { font-family: var(--font-family-base); font-weight: var(--type-display-weight); font-size: var(--type-display-size); line-height: var(--type-display-line); color: var(--surface-onsurface); }
+.ab-title   { font-family: var(--font-family-base); font-weight: var(--type-title-weight);   font-size: var(--type-title-size);   line-height: var(--type-title-line);   color: var(--surface-onsurface); }
+.ab-heading { font-family: var(--font-family-base); font-weight: var(--type-heading-weight); font-size: var(--type-heading-size); line-height: var(--type-heading-line); color: var(--surface-onsurface); }
+.ab-button  { font-family: var(--font-family-base); font-weight: var(--type-button-weight);  font-size: var(--type-button-size);  line-height: var(--type-button-line); }
+.ab-body    { font-family: var(--font-family-base); font-weight: var(--type-body-weight);    font-size: var(--type-body-size);    line-height: var(--type-body-line);    color: var(--surface-onsurface); }
+.ab-callout { font-family: var(--font-family-base); font-weight: var(--type-callout-weight); font-size: var(--type-callout-size); line-height: var(--type-callout-line); }
+.ab-label   { font-family: var(--font-family-base); font-weight: var(--type-label-weight);   font-size: var(--type-label-size);   line-height: var(--type-label-line);   color: var(--surface-onsurfacemedium); }

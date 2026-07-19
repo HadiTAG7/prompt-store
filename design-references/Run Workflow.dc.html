@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/styles.css">
+<script src="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>html{direction:rtl} body{margin:0;background:var(--ab-surface);font-family:var(--font-family-base)} a{color:var(--ab-primary);text-decoration:none} a:hover{color:var(--ab-secondary)} *{box-sizing:border-box} ::placeholder{color:var(--ab-on-surface-low)} textarea:focus,input:focus{border-color:transparent !important;box-shadow:inset 0 0 0 3px var(--ab-secondary);outline:none} @keyframes ab-toast{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}</style>
+</helmet>
+<div dir="rtl" data-screen-label="وضع تشغيل المسار" style="display:flex;flex-direction:column;min-height:100vh">
+  <header style="height:60px;background:var(--ab-surface-container-lowest);border-bottom:1px solid var(--ab-outline-variant);display:flex;align-items:center;gap:12px;padding:0 24px;flex:none;position:sticky;top:0;z-index:10">
+    <a href="Workflow Details.dc.html" title="الخروج من وضع التشغيل" style="width:36px;height:36px;border-radius:9999px;display:inline-flex;align-items:center;justify-content:center;color:var(--ab-on-surface-medium)" style-hover="background:var(--ab-surface-container);color:var(--ab-on-surface)"><i class="ph ph-arrow-right" style="font-size:19px"></i></a>
+    <div style="display:flex;flex-direction:column">
+      <span style="font-size:15px;font-weight:600;color:var(--ab-on-surface)">بناء تقرير تنفيذي</span>
+      <span style="font-size:11.5px;color:var(--ab-on-surface-low)">وضع التشغيل — خطوة واحدة في كل مرة</span>
+    </div>
+    <span style="font-size:11.5px;line-height:18px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-primary-container);color:var(--ab-on-primary-container)">{{ progressChip }}</span>
+    <span style="flex:1"></span>
+    <span style="display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ab-success)"><i class="ph-fill ph-cloud-check" style="font-size:15px"></i>تم الحفظ تلقائيًا الآن</span>
+    <span style="width:1px;height:22px;background:var(--ab-outline-variant)"></span>
+    <button onClick="{{ askReset }}" style="height:34px;border:none;border-radius:8px;background:transparent;padding:0 10px;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-family-base);font-size:13px;font-weight:500;color:var(--ab-danger);cursor:pointer" style-hover="background:var(--ab-danger-container)"><i class="ph ph-arrow-counter-clockwise" style="font-size:15px"></i>إعادة تعيين التقدم</button>
+  </header>
+  <div style="flex:1;display:grid;grid-template-columns:312px minmax(0,1fr);gap:0;align-items:stretch">
+    <aside style="border-inline-end:1px solid var(--ab-outline-variant);background:var(--ab-surface-container-lowest);padding:20px 16px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:8px;padding:0 8px">
+        <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--ab-on-surface-medium)"><span>التقدم الكلي</span><span style="font-weight:600">{{ progressPctLabel }}</span></div>
+        <div style="height:8px;border-radius:9999px;background:var(--ab-surface-container);overflow:hidden"><div style="width:{{ progressPct }};height:100%;border-radius:9999px;background:var(--ab-primary);transition:width 200ms ease"></div></div>
+        <span style="font-size:12px;color:var(--ab-on-surface-low)">{{ progressLabel }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;overflow:auto">
+        <sc-for list="{{ rail }}" as="s" hint-placeholder-count="10">
+          <button onClick="{{ s.pick }}" disabled="{{ s.locked }}" aria-current="{{ s.aria }}" style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:none;border-radius:12px;background:{{ s.bg }};cursor:{{ s.cursor }};text-align:start;font-family:var(--font-family-base);opacity:{{ s.opacity }}" style-hover="background:{{ s.hoverBg }}">
+            <span style="width:26px;height:26px;border-radius:9999px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex:none;background:{{ s.numBg }};color:{{ s.numFg }};border:{{ s.numBorder }}"><sc-if value="{{ s.done }}" hint-placeholder-val="{{ false }}"><i class="ph-bold ph-check" style="font-size:12px"></i></sc-if><sc-if value="{{ s.notDone }}" hint-placeholder-val="{{ true }}">{{ s.num }}</sc-if></span>
+            <span style="flex:1;min-width:0;font-size:13.5px;font-weight:{{ s.wt }};color:{{ s.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.title }}</span>
+            <sc-if value="{{ s.viewing }}" hint-placeholder-val="{{ false }}"><i class="ph-fill ph-caret-left" style="font-size:12px;color:var(--ab-primary)"></i></sc-if>
+          </button>
+        </sc-for>
+      </div>
+    </aside>
+    <main style="padding:28px 32px 56px;display:flex;flex-direction:column;gap:16px;max-width:820px;width:100%">
+      <sc-if value="{{ workflowDone }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:64px 32px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;margin-top:24px">
+          <span style="width:72px;height:72px;border-radius:9999px;background:var(--ab-success-container);display:inline-flex;align-items:center;justify-content:center"><i class="ph-fill ph-check-circle" style="font-size:38px;color:var(--ab-success)"></i></span>
+          <h1 style="margin:0;font-size:24px;font-weight:700;color:var(--ab-on-surface)">اكتمل المسار</h1>
+          <p style="margin:0;font-size:15px;line-height:24px;color:var(--ab-on-surface-medium);max-width:420px">أنجزت الخطوات العشر كاملة. يمكنك تصدير النتائج أو مراجعة أي خطوة من القائمة الجانبية.</p>
+          <div style="display:flex;gap:12px;margin-top:8px">
+            <a href="Dashboard.dc.html"><x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="العودة إلى لوحة التحكم" size="medium" variant="neutral" emphasis="high" hint-size="auto,40px"></x-import></a>
+            <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="تصدير النتائج" size="medium" leading-icon="export" hint-size="auto,40px"></x-import>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ stepVisible }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:13px;font-weight:500;color:var(--ab-primary)">{{ stepCounter }}</span>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <h1 style="margin:0;font-size:23px;line-height:34px;font-weight:700;color:var(--ab-on-surface)">{{ stepTitle }}</h1>
+            <sc-if value="{{ viewingDone }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;line-height:20px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-success-container);color:var(--ab-success);display:inline-flex;align-items:center;gap:4px"><i class="ph-fill ph-check-circle" style="font-size:13px"></i>خطوة مكتملة</span></sc-if>
+          </div>
+          <p style="margin:0;font-size:14.5px;line-height:23px;color:var(--ab-on-surface-medium)">{{ stepDesc }}</p>
+        </div>
+        <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;font-weight:600;color:var(--ab-on-surface-medium);display:inline-flex;align-items:center;gap:6px"><i class="ph ph-quotes" style="font-size:15px"></i>قالب البرومبت</span>
+          <div style="font-size:14.5px;line-height:30px;color:var(--ab-on-surface)">
+            <sc-for list="{{ segs }}" as="g" hint-placeholder-count="5"><sc-if value="{{ g.vv }}" hint-placeholder-val="{{ false }}"><span style="background:var(--ab-primary-container);color:var(--ab-on-primary-container);border-radius:6px;padding:2px 7px;font-size:13px;font-weight:500;white-space:nowrap">{{ g.vv }}</span></sc-if><sc-if value="{{ g.text }}" hint-placeholder-val="{{ true }}"><span>{{ g.text }}</span></sc-if></sc-for>
+          </div>
+        </section>
+        <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:13px;font-weight:600;color:var(--ab-on-surface-medium);display:inline-flex;align-items:center;gap:6px"><i class="ph ph-brackets-curly" style="font-size:15px"></i>المتغيرات</span>
+            <sc-if value="{{ missingBadge }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;line-height:18px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-gold-container);color:var(--ab-gold);display:inline-flex;align-items:center;gap:4px"><i class="ph-fill ph-warning" style="font-size:12px"></i>{{ missingBadge }}</span></sc-if>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 14px">
+            <sc-for list="{{ fields }}" as="f" hint-placeholder-count="5">
+              <label style="display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:500;color:var(--ab-on-surface-medium)">{{ f.name }}
+                <input value="{{ f.val }}" onChange="{{ f.set }}" placeholder="أدخل القيمة…" style="height:42px;border-radius:12px;border:{{ f.border }};background:var(--ab-surface);padding:0 14px;font-family:var(--font-family-base);font-size:14px;color:var(--ab-on-surface)">
+                <sc-if value="{{ f.showErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--ab-danger);display:inline-flex;align-items:center;gap:4px"><i class="ph-fill ph-warning-circle" style="font-size:12px"></i>هذا المتغير مطلوب</span></sc-if>
+              </label>
+            </sc-for>
+          </div>
+        </section>
+        <section style="background:var(--ab-surface);border:1.5px solid var(--ab-primary);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span style="font-size:13px;font-weight:600;color:var(--ab-primary);display:inline-flex;align-items:center;gap:6px"><i class="ph-fill ph-sparkle" style="font-size:15px"></i>البرومبت النهائي</span>
+            <span style="flex:1"></span>
+            <button onClick="{{ copyPrompt }}" style="height:36px;border:none;border-radius:10px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-family-base);font-size:13.5px;font-weight:500;cursor:pointer;background:{{ copyBg }};color:{{ copyFg }};transition:background 120ms ease"><i class="{{ copyIcon }}" style="font-size:16px"></i>{{ copyLabel }}</button>
+            <button style="height:36px;border:1px solid var(--ab-outline-variant);border-radius:10px;background:var(--ab-surface-container-lowest);padding:0 14px;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-family-base);font-size:13.5px;font-weight:500;color:var(--ab-on-surface);cursor:pointer" style-hover="background:var(--ab-surface-container-low)"><i class="ph ph-arrow-square-out" style="font-size:15px"></i>فتح في مساعد الذكاء الاصطناعي</button>
+          </div>
+          <div style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:12px;padding:14px 16px;font-size:14.5px;line-height:30px;color:var(--ab-on-surface)">
+            <sc-for list="{{ preview }}" as="p" hint-placeholder-count="5"><sc-if value="{{ p.val }}" hint-placeholder-val="{{ false }}"><span style="background:var(--ab-success-container);color:var(--ab-success);border-radius:6px;padding:2px 7px;font-size:13.5px;font-weight:500">{{ p.val }}</span></sc-if><sc-if value="{{ p.miss }}" hint-placeholder-val="{{ false }}"><span style="border:1.5px dashed var(--ab-gold);color:var(--ab-gold);border-radius:6px;padding:1px 7px;font-size:13px;font-weight:500;white-space:nowrap">{{ p.miss }}</span></sc-if><sc-if value="{{ p.text }}" hint-placeholder-val="{{ true }}"><span>{{ p.text }}</span></sc-if></sc-for>
+          </div>
+        </section>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">ناتج هذه الخطوة
+            <textarea rows="5" placeholder="الصق هنا ناتج المساعد بعد تشغيل البرومبت…" style="border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface-container-lowest);padding:12px 14px;font-family:var(--font-family-base);font-size:14px;line-height:22px;color:var(--ab-on-surface);resize:vertical"></textarea>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">ملاحظات
+            <textarea rows="5" placeholder="ملاحظات لك أو لفريقك حول هذه الخطوة…" style="border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface-container-lowest);padding:12px 14px;font-family:var(--font-family-base);font-size:14px;line-height:22px;color:var(--ab-on-surface);resize:vertical"></textarea>
+          </label>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid var(--ab-outline-variant);padding-top:16px">
+          <button onClick="{{ goPrev }}" disabled="{{ prevDisabled }}" style="height:40px;border:1px solid var(--ab-outline-variant);border-radius:12px;background:var(--ab-surface-container-lowest);padding:0 16px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-family-base);font-size:14px;font-weight:500;color:var(--ab-on-surface);cursor:{{ prevCursor }};opacity:{{ prevOpacity }}" style-hover="background:var(--ab-surface-container-low)"><i class="ph ph-arrow-right" style="font-size:16px"></i>الخطوة السابقة</button>
+          <span style="flex:1"></span>
+          <sc-if value="{{ validationMsg }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:var(--ab-danger);display:inline-flex;align-items:center;gap:5px"><i class="ph-fill ph-warning-circle" style="font-size:15px"></i>{{ validationMsg }}</span></sc-if>
+          <sc-if value="{{ showNext }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ goNext }}" style="height:40px;border:1px solid var(--ab-outline-variant);border-radius:12px;background:var(--ab-surface-container-lowest);padding:0 16px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-family-base);font-size:14px;font-weight:500;color:var(--ab-on-surface);cursor:pointer" style-hover="background:var(--ab-surface-container-low)">الخطوة التالية<i class="ph ph-arrow-left" style="font-size:16px"></i></button>
+          </sc-if>
+          <sc-if value="{{ showComplete }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ markDone }}" style="height:44px;border:none;border-radius:12px;background:var(--ab-primary);color:var(--ab-on-primary);padding:0 20px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-family-base);font-size:15px;font-weight:500;cursor:pointer;transition:background 120ms ease" style-hover="background:var(--ab-secondary)"><i class="ph-bold ph-check" style="font-size:17px"></i>وضع علامة مكتملة والمتابعة</button>
+          </sc-if>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+  <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Dialog" open="{{ showReset }}" title="إعادة تعيين التقدم؟" confirm-label="إعادة التعيين" cancel-label="إلغاء" danger="{{ true }}" on-confirm="{{ doReset }}" on-cancel="{{ cancelReset }}" hint-size="0px,0px">سيتم مسح حالة الإكمال لجميع الخطوات، مع الاحتفاظ بقيم المتغيرات والملاحظات.</x-import>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:28px;left:50%;transform:translate(-50%,0);background:var(--ab-inverse-surface);color:var(--ab-inverse-on-surface);border-radius:12px;padding:10px 18px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;box-shadow:var(--ab-shadow-lg);z-index:60;animation:ab-toast 160ms ease">
+      <i class="{{ toastIcon }}" style="font-size:17px;color:{{ toastColor }}"></i>{{ toast }}
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    completed: 2, viewing: 3, validate: false, copied: false, toast: null, toastKind: 'ok', showReset: false,
+    values: { 'اسم الشركة': 'شركة نماء القابضة', 'الفترة الزمنية': 'الربع الثاني ٢٠٢٦', 'الجمهور المستهدف': '', 'نوع التقرير': 'تقرير أداء ربع سنوي', 'نبرة الكتابة': '' },
+  };
+  defs() {
+    return [
+      { title: 'تحديد الهدف والجمهور', desc: 'توضيح الغرض من التقرير وتحديد من سيقرؤه وما القرار المرتبط به.', vars: ['اسم الشركة', 'الجمهور المستهدف'], segs: [{ text: 'حدّد هدف التقرير التنفيذي لشركة ' }, { vv: 'اسم الشركة' }, { text: ' والجمهور المستهدف ' }, { vv: 'الجمهور المستهدف' }, { text: ' والقرار المتوقع بعد قراءته.' }] },
+      { title: 'جمع المدخلات', desc: 'حصر مصادر البيانات والمستندات والملاحظات اللازمة قبل البدء.', vars: ['نوع التقرير'], segs: [{ text: 'اذكر قائمة بالمدخلات والمستندات المطلوبة لإعداد ' }, { vv: 'نوع التقرير' }, { text: ' مع تصنيفها حسب الأولوية.' }] },
+      { title: 'تحديد هيكل التقرير', desc: 'بناء الهيكل العام للتقرير: الأقسام والعناوين والترتيب المنطقي، بما يناسب الجمهور والنبرة المطلوبة.', vars: ['نوع التقرير', 'اسم الشركة', 'الفترة الزمنية', 'الجمهور المستهدف', 'نبرة الكتابة'], segs: [{ text: 'حدّد هيكل ' }, { vv: 'نوع التقرير' }, { text: ' لشركة ' }, { vv: 'اسم الشركة' }, { text: ' عن ' }, { vv: 'الفترة الزمنية' }, { text: '، موجهًا إلى ' }, { vv: 'الجمهور المستهدف' }, { text: ' وبنبرة ' }, { vv: 'نبرة الكتابة' }, { text: '، مع أقسام رئيسية وعناوين فرعية مقترحة لكل قسم.' }] },
+      { title: 'استخراج النقاط الرئيسية', desc: 'تلخيص أهم النقاط من المدخلات وربطها بهدف التقرير.', vars: ['اسم الشركة'], segs: [{ text: 'استخرج أهم ١٠ نقاط من مدخلات ' }, { vv: 'اسم الشركة' }, { text: ' مرتبة حسب صلتها بهدف التقرير.' }] },
+      { title: 'تحليل البيانات', desc: 'تحويل الأرقام إلى دلالات واتجاهات قابلة للفهم.', vars: ['اسم الشركة', 'الفترة الزمنية'], segs: [{ text: 'حلّل بيانات ' }, { vv: 'اسم الشركة' }, { text: ' عن ' }, { vv: 'الفترة الزمنية' }, { text: ' واستخرج ثلاثة اتجاهات رئيسية مع دلالة كل اتجاه.' }] },
+      { title: 'صياغة المسودة', desc: 'كتابة المسودة الأولى قسمًا بعد قسم وفق الهيكل المعتمد.', vars: ['نبرة الكتابة'], segs: [{ text: 'اكتب مسودة الأقسام وفق الهيكل المعتمد وبنبرة ' }, { vv: 'نبرة الكتابة' }, { text: '.' }] },
+      { title: 'تحسين الوضوح والأسلوب', desc: 'مراجعة الصياغة لرفع الوضوح وتوحيد النبرة عبر الأقسام.', vars: ['نبرة الكتابة'], segs: [{ text: 'أعد صياغة المسودة لرفع الوضوح مع الحفاظ على نبرة ' }, { vv: 'نبرة الكتابة' }, { text: '.' }] },
+      { title: 'كتابة الاستنتاجات والتوصيات', desc: 'صياغة خلاصة عملية وتوصيات مرتبة حسب الأولوية.', vars: ['الجمهور المستهدف'], segs: [{ text: 'اكتب استنتاجات وتوصيات عملية موجهة إلى ' }, { vv: 'الجمهور المستهدف' }, { text: ' مرتبة حسب الأثر وسهولة التنفيذ.' }] },
+      { title: 'مراجعة الجودة', desc: 'فحص الدقة والاتساق واكتمال الأقسام قبل التسليم.', vars: [], segs: [{ text: 'راجع التقرير كاملًا وأعد قائمة بالفجوات والتناقضات ومواضع الغموض.' }] },
+      { title: 'تجهيز النسخة النهائية', desc: 'إخراج النسخة النهائية بصيغة قابلة للتسليم والمشاركة.', vars: ['نوع التقرير'], segs: [{ text: 'جهّز النسخة النهائية من ' }, { vv: 'نوع التقرير' }, { text: ' بملخص تنفيذي وصفحة غلاف مناسبة.' }] },
+    ];
+  }
+  flash(msg, kind) {
+    clearTimeout(this._t);
+    this.setState({ toast: msg, toastKind: kind || 'ok' });
+    this._t = setTimeout(() => this.setState({ toast: null, copied: false }), 2200);
+  }
+  renderVals() {
+    const nums = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    const ar = (n) => String(n).split('').map((d) => nums[+d]).join('');
+    const defs = this.defs();
+    const { completed, viewing, values, validate, copied, toast, toastKind, showReset } = this.state;
+    const workflowDone = completed >= 10;
+    const cur = completed + 1;
+    const rail = defs.map((d, i) => {
+      const n = i + 1, done = n <= completed, isCur = !workflowDone && n === cur, isView = !workflowDone && n === viewing, locked = n > cur;
+      return {
+        num: ar(n), title: d.title, done, notDone: !done, locked, viewing: isView,
+        aria: isView ? 'step' : undefined,
+        pick: () => this.setState({ viewing: n, validate: false }),
+        bg: isView ? 'var(--ab-primary-container)' : 'transparent',
+        hoverBg: isView ? 'var(--ab-primary-container)' : locked ? 'transparent' : 'var(--ab-surface-container-low)',
+        cursor: locked ? 'default' : 'pointer',
+        opacity: locked ? 0.5 : 1,
+        fg: isView ? 'var(--ab-on-primary-container)' : done ? 'var(--ab-on-surface)' : 'var(--ab-on-surface-medium)',
+        wt: isView ? 600 : 400,
+        numBg: done ? 'var(--ab-success)' : isCur ? 'var(--ab-primary)' : 'transparent',
+        numFg: done || isCur ? '#fff' : 'var(--ab-on-surface-low)',
+        numBorder: done || isCur ? 'none' : '1.5px solid var(--ab-outline)',
+      };
+    });
+    const step = defs[Math.min(viewing, 10) - 1];
+    const missing = step.vars.filter((v) => !(values[v] || '').trim());
+    const fields = step.vars.map((v) => {
+      const empty = !(values[v] || '').trim();
+      const showErr = validate && empty;
+      return {
+        name: v, val: values[v] || '', showErr,
+        border: showErr ? '1.5px solid var(--ab-danger)' : '1px solid var(--ab-outline-variant)',
+        set: (e) => this.setState({ values: Object.assign({}, this.state.values, { [v]: e.target.value }) }),
+      };
+    });
+    const preview = step.segs.map((g) => {
+      if (!g.vv) return { text: g.text };
+      const val = (values[g.vv] || '').trim();
+      return val ? { val } : { miss: g.vv };
+    });
+    const viewingDone = viewing <= completed;
+    return {
+      workflowDone, stepVisible: !workflowDone,
+      progressChip: 'الخطوة ' + ar(Math.min(cur, 10)) + ' من ١٠',
+      progressPct: (completed * 10) + '%',
+      progressPctLabel: ar(completed * 10) + '٪',
+      progressLabel: ar(completed) + ' من ١٠ خطوات مكتملة',
+      rail, segs: step.segs, preview, fields,
+      stepCounter: 'الخطوة ' + ar(viewing) + ' من ١٠',
+      stepTitle: step.title, stepDesc: step.desc, viewingDone,
+      missingBadge: missing.length ? (missing.length === 1 ? 'متغير واحد ناقص' : missing.length === 2 ? 'متغيران ناقصان' : ar(missing.length) + ' متغيرات ناقصة') : '',
+      validationMsg: validate && missing.length ? 'أكمل المتغيرات الناقصة قبل إكمال الخطوة' : '',
+      copyLabel: copied ? 'تم النسخ' : 'نسخ البرومبت',
+      copyIcon: copied ? 'ph-bold ph-check' : 'ph ph-copy',
+      copyBg: copied ? 'var(--ab-success-container)' : 'var(--ab-primary)',
+      copyFg: copied ? 'var(--ab-success)' : 'var(--ab-on-primary)',
+      copyPrompt: () => {
+        const text = step.segs.map((g) => g.vv ? ((values[g.vv] || '').trim() || '{{' + g.vv + '}}') : g.text).join('');
+        try { navigator.clipboard.writeText(text); } catch (e) {}
+        this.setState({ copied: true });
+        this.flash('تم نسخ البرومبت إلى الحافظة', 'ok');
+      },
+      goPrev: () => viewing > 1 && this.setState({ viewing: viewing - 1, validate: false }),
+      prevDisabled: viewing <= 1,
+      prevCursor: viewing <= 1 ? 'default' : 'pointer',
+      prevOpacity: viewing <= 1 ? 0.45 : 1,
+      showNext: viewingDone,
+      goNext: () => this.setState({ viewing: Math.min(viewing + 1, cur), validate: false }),
+      showComplete: !viewingDone,
+      markDone: () => {
+        if (missing.length) { this.setState({ validate: true }); this.flash('بعض المتغيرات المطلوبة ناقصة', 'warn'); return; }
+        const nc = Math.max(completed, viewing);
+        this.setState({ completed: nc, viewing: Math.min(nc + 1, 10), validate: false });
+        this.flash('تم إكمال الخطوة — أحسنت', 'ok');
+      },
+      askReset: () => this.setState({ showReset: true }),
+      cancelReset: () => this.setState({ showReset: false }),
+      doReset: () => { this.setState({ completed: 0, viewing: 1, showReset: false, validate: false }); this.flash('تمت إعادة تعيين التقدم', 'ok'); },
+      toast, showReset,
+      toastIcon: toastKind === 'warn' ? 'ph-fill ph-warning' : 'ph-fill ph-check-circle',
+      toastColor: toastKind === 'warn' ? 'var(--ab-gold)' : '#7bd8b0',
+    };
+  }
+}
+</script>
+</body>
+</html>

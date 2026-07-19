@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/styles.css">
+<script src="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>html{direction:rtl} body{margin:0;background:var(--ab-surface);font-family:var(--font-family-base)} a{color:var(--ab-primary);text-decoration:none} a:hover{color:var(--ab-secondary)} *{box-sizing:border-box} ::placeholder{color:var(--ab-on-surface-low)} @keyframes ab-shimmer{0%{opacity:.55}50%{opacity:1}100%{opacity:.55}}</style>
+</helmet>
+<div dir="rtl" data-screen-label="مسارات العمل" style="display:flex;min-height:100vh;align-items:stretch">
+  <dc-import name="Sidebar" active="workflows" hint-size="264px,900px" style="flex:none"></dc-import>
+  <main style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <header style="height:64px;background:var(--ab-surface-container-lowest);border-bottom:1px solid var(--ab-outline-variant);display:flex;align-items:center;gap:12px;padding:0 32px;flex:none;position:sticky;top:0;z-index:5">
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.SearchField" placeholder="ابحث في المسارات والبرومبتات" style="width:400px;height:40px" hint-size="400px,40px"></x-import>
+      <span style="flex:1"></span>
+      <button title="إنشاء سريع" style="width:40px;height:40px;border-radius:9999px;border:none;background:var(--ab-primary-container);color:var(--ab-on-primary-container);display:inline-flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--ab-secondary-container)"><i class="ph ph-plus" style="font-size:20px"></i></button>
+      <button title="المظهر الداكن" style="width:40px;height:40px;border-radius:9999px;border:none;background:transparent;color:var(--ab-on-surface-medium);display:inline-flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--ab-surface-container)"><i class="ph ph-moon" style="font-size:20px"></i></button>
+      <span style="width:1px;height:24px;background:var(--ab-outline-variant)"></span>
+      <button style="display:flex;align-items:center;gap:8px;border:none;background:transparent;padding:4px;border-radius:9999px;cursor:pointer" style-hover="background:var(--ab-surface-container)">
+        <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Avatar" type="initials" initials="س" size="sm" hint-size="32px,32px"></x-import>
+        <i class="ph ph-caret-down" style="font-size:14px;color:var(--ab-on-surface-low)"></i>
+      </button>
+    </header>
+    <div style="padding:32px;display:flex;flex-direction:column;gap:20px;max-width:1240px;width:100%;margin:0 auto">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <h1 style="margin:0;font-size:28px;line-height:40px;font-weight:700;color:var(--ab-on-surface)">مسارات العمل</h1>
+          <span style="font-size:14px;color:var(--ab-on-surface-low)">{{ countLabel }}</span>
+        </div>
+        <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="مسار جديد" size="medium" leading-icon="plus" hint-size="auto,40px"></x-import>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="position:relative;width:300px">
+          <i class="ph ph-magnifying-glass" style="position:absolute;inset-inline-start:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ab-on-surface-low)"></i>
+          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="ابحث في المسارات" aria-label="بحث في المسارات" style="width:100%;height:40px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface-container-lowest);padding:0 42px 0 14px;font-family:var(--font-family-base);font-size:14px;color:var(--ab-on-surface);outline:none" style-focus="border-color:transparent;box-shadow:inset 0 0 0 3px var(--ab-secondary)">
+        </div>
+        <div style="position:relative">
+          <button onClick="{{ toggleSort }}" style="height:40px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface-container-lowest);padding:0 14px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-family-base);font-size:14px;color:var(--ab-on-surface);cursor:pointer" style-hover="background:var(--ab-surface-container-low)"><i class="ph ph-arrows-down-up" style="font-size:16px;color:var(--ab-on-surface-medium)"></i>ترتيب: {{ sortLabel }}<i class="ph ph-caret-down" style="font-size:12px;color:var(--ab-on-surface-low)"></i></button>
+          <sc-if value="{{ sortOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:46px;inset-inline-start:0;min-width:190px;background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:12px;box-shadow:var(--ab-shadow-md);padding:6px;z-index:20;display:flex;flex-direction:column">
+              <sc-for list="{{ sortOptions }}" as="o" hint-placeholder-count="3">
+                <button onClick="{{ o.pick }}" style="display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;border:none;border-radius:8px;background:transparent;font-family:var(--font-family-base);font-size:14px;color:var(--ab-on-surface);cursor:pointer;text-align:start" style-hover="background:var(--ab-surface-container-low)"><i class="{{ o.checkCls }}" style="font-size:16px;color:var(--ab-primary);width:16px"></i>{{ o.label }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <span style="flex:1"></span>
+        <div style="display:inline-flex;border:1px solid var(--ab-outline-variant);border-radius:12px;overflow:hidden;background:var(--ab-surface-container-lowest)">
+          <button title="عرض شبكي" onClick="{{ setGrid }}" style="width:40px;height:38px;border:none;background:{{ gridBtnBg }};color:{{ gridBtnFg }};cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-squares-four" style="font-size:18px"></i></button>
+          <button title="عرض قائمة" onClick="{{ setList }}" style="width:40px;height:38px;border:none;background:{{ listBtnBg }};color:{{ listBtnFg }};cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-list" style="font-size:18px"></i></button>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7">
+          <button onClick="{{ c.pick }}" style="height:34px;border-radius:9999px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--font-family-base);font-weight:500;font-size:13.5px;border:{{ c.border }};background:{{ c.bg }};color:{{ c.fg }}" style-focus="outline:3px solid var(--ab-secondary);outline-offset:1px">{{ c.label }}<sc-if value="{{ c.sel }}" hint-placeholder-val="{{ false }}"><i class="ph-bold ph-check" style="font-size:13px"></i></sc-if></button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px">
+          <sc-for list="{{ skeletons }}" as="s" hint-placeholder-count="6">
+            <div style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;animation:ab-shimmer 1.4s ease-in-out infinite">
+              <div style="display:flex;gap:12px;align-items:center"><span style="width:40px;height:40px;border-radius:10px;background:var(--ab-surface-container)"></span><span style="flex:1;height:14px;border-radius:6px;background:var(--ab-surface-container)"></span></div>
+              <span style="height:10px;border-radius:6px;background:var(--ab-surface-container);width:90%"></span>
+              <span style="height:10px;border-radius:6px;background:var(--ab-surface-container);width:70%"></span>
+              <div style="display:flex;gap:8px"><span style="width:64px;height:22px;border-radius:9999px;background:var(--ab-surface-container)"></span><span style="width:64px;height:22px;border-radius:9999px;background:var(--ab-surface-container)"></span></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--ab-surface-container-lowest);border:1px dashed var(--ab-outline);border-radius:16px;padding:64px 24px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+          <span style="width:64px;height:64px;border-radius:9999px;background:var(--ab-primary-container);display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-flow-arrow" style="font-size:30px;color:var(--ab-on-primary-container)"></i></span>
+          <div style="font-size:18px;font-weight:600;color:var(--ab-on-surface)">لا توجد مسارات بعد</div>
+          <p style="margin:0;font-size:14px;line-height:22px;color:var(--ab-on-surface-medium);max-width:360px">ابدأ بإنشاء أول مسار عمل لك، أو استورد مسارًا جاهزًا من ملف.</p>
+          <div style="display:flex;gap:12px;margin-top:8px">
+            <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="استيراد مسار" size="medium" variant="neutral" emphasis="high" hint-size="auto,40px"></x-import>
+            <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="إنشاء مسار جديد" size="medium" leading-icon="plus" hint-size="auto,40px"></x-import>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isNoResults }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:56px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+          <span style="width:56px;height:56px;border-radius:9999px;background:var(--ab-surface-container);display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-magnifying-glass" style="font-size:26px;color:var(--ab-on-surface-medium)"></i></span>
+          <div style="font-size:17px;font-weight:600;color:var(--ab-on-surface)">لا توجد نتائج مطابقة</div>
+          <p style="margin:0;font-size:14px;color:var(--ab-on-surface-medium)">جرّب كلمات مختلفة أو أزل عوامل التصفية.</p>
+          <button onClick="{{ clearFilters }}" style="margin-top:6px;height:36px;border-radius:12px;border:none;background:var(--ab-primary-container);color:var(--ab-on-primary-container);padding:0 16px;font-family:var(--font-family-base);font-weight:500;font-size:14px;cursor:pointer">مسح عوامل التصفية</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px">
+          <sc-for list="{{ list }}" as="w" hint-placeholder-count="6">
+            <article style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;transition:box-shadow 120ms ease" style-hover="box-shadow:var(--ab-shadow-md)">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="width:40px;height:40px;border-radius:10px;background:var(--ab-surface-container);display:inline-flex;align-items:center;justify-content:center;flex:none"><i class="{{ w.iconCls }}" style="font-size:20px;color:var(--ab-on-surface-medium)"></i></span>
+                <span style="flex:1"></span>
+                <button title="مفضلة" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:{{ w.starFg }};display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container)"><i class="{{ w.starCls }}" style="font-size:18px"></i></button>
+                <button title="نسخ المسار" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container);color:var(--ab-on-surface)"><i class="ph ph-copy" style="font-size:18px"></i></button>
+                <button title="تصدير" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container);color:var(--ab-on-surface)"><i class="ph ph-export" style="font-size:18px"></i></button>
+                <button title="حذف" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-danger-container);color:var(--ab-danger)"><i class="ph ph-trash" style="font-size:18px"></i></button>
+              </div>
+              <div>
+                <a href="Workflow Details.dc.html" style="font-size:16px;font-weight:600;color:var(--ab-on-surface)">{{ w.title }}</a>
+                <p style="margin:4px 0 0;font-size:13.5px;line-height:20px;color:var(--ab-on-surface-medium);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ w.desc }}</p>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <sc-for list="{{ w.tags }}" as="t" hint-placeholder-count="2"><span style="font-size:12px;line-height:20px;padding:1px 10px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium)">{{ t }}</span></sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;border-top:1px solid var(--ab-outline-variant);padding-top:12px;margin-top:auto">
+                <span style="font-size:12.5px;color:var(--ab-on-surface-medium);display:inline-flex;align-items:center;gap:5px"><i class="ph ph-list-numbers" style="font-size:15px;color:var(--ab-on-surface-low)"></i>{{ w.steps }}</span>
+                <span style="font-size:12.5px;color:var(--ab-on-surface-low)">{{ w.updated }}</span>
+                <span style="flex:1"></span>
+                <a href="Run Workflow.dc.html" style="font-size:13px;font-weight:500;color:var(--ab-on-primary);background:var(--ab-primary);border-radius:8px;height:32px;display:inline-flex;align-items:center;gap:6px;padding:0 12px" style-hover="background:var(--ab-secondary);color:var(--ab-on-primary)"><i class="ph-fill ph-play" style="font-size:13px"></i>بدء المسار</a>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showList }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;overflow:hidden">
+          <sc-for list="{{ list }}" as="w" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 200px 92px 110px 150px auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--ab-outline-variant)" style-hover="background:var(--ab-surface)">
+              <span style="width:40px;height:40px;border-radius:10px;background:var(--ab-surface-container);display:inline-flex;align-items:center;justify-content:center"><i class="{{ w.iconCls }}" style="font-size:20px;color:var(--ab-on-surface-medium)"></i></span>
+              <div style="min-width:0">
+                <a href="Workflow Details.dc.html" style="font-size:15px;font-weight:600;color:var(--ab-on-surface)">{{ w.title }}</a>
+                <div style="font-size:13px;color:var(--ab-on-surface-low);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.desc }}</div>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ w.tags }}" as="t" hint-placeholder-count="2"><span style="font-size:12px;line-height:20px;padding:1px 10px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium)">{{ t }}</span></sc-for></div>
+              <span style="font-size:13px;color:var(--ab-on-surface-medium)">{{ w.steps }}</span>
+              <span style="font-size:12.5px;color:var(--ab-on-surface-low)">{{ w.updated }}</span>
+              <div style="display:flex;gap:2px">
+                <button title="مفضلة" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:{{ w.starFg }};display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container)"><i class="{{ w.starCls }}" style="font-size:17px"></i></button>
+                <button title="نسخ المسار" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container);color:var(--ab-on-surface)"><i class="ph ph-copy" style="font-size:17px"></i></button>
+                <button title="تصدير" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container);color:var(--ab-on-surface)"><i class="ph ph-export" style="font-size:17px"></i></button>
+                <button title="حذف" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-danger-container);color:var(--ab-danger)"><i class="ph ph-trash" style="font-size:17px"></i></button>
+              </div>
+              <a href="Run Workflow.dc.html" style="font-size:13px;font-weight:500;color:var(--ab-primary);border:1px solid var(--ab-outline-variant);border-radius:8px;height:32px;display:inline-flex;align-items:center;gap:6px;padding:0 12px;justify-self:end" style-hover="background:var(--ab-primary-container);color:var(--ab-on-primary-container)"><i class="ph-fill ph-play" style="font-size:12px"></i>بدء</a>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;demoState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;default&quot;,&quot;options&quot;:[&quot;default&quot;,&quot;loading&quot;,&quot;empty&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;حالات العرض&quot;},&quot;defaultView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;grid&quot;,&quot;options&quot;:[&quot;grid&quot;,&quot;list&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;حالات العرض&quot;}}">
+class Component extends DCLogic {
+  state = { query: '', cat: 'الكل', sort: 'updated', view: null, sortOpen: false };
+  data() {
+    const star = (on) => ({ starCls: on ? 'ph-fill ph-star' : 'ph ph-star', starFg: on ? 'var(--ab-gold)' : 'var(--ab-on-surface-low)' });
+    return [
+      Object.assign({ iconCls: 'ph ph-file-text', title: 'بناء تقرير تنفيذي', desc: 'مسار متكامل لتحويل المدخلات الأولية إلى تقرير تنفيذي منظم وقابل للتسليم.', stepsN: 10, steps: '١٠ خطوات', cat: 'التقارير', tags: ['تنفيذي', 'تحليل'], updated: 'قبل ساعتين', u: 1 }, star(true)),
+      Object.assign({ iconCls: 'ph ph-chart-bar', title: 'تحليل منافسين', desc: 'مقارنة شاملة للمنافسين الرئيسيين مع خلاصة تنفيذية وتوصيات.', stepsN: 8, steps: '٨ خطوات', cat: 'التحليل', tags: ['سوق', 'مقارنة'], updated: 'أمس', u: 2 }, star(true)),
+      Object.assign({ iconCls: 'ph ph-presentation-chart', title: 'إعداد عرض تقديمي', desc: 'بناء عرض تقديمي مقنع من الفكرة إلى الشرائح النهائية.', stepsN: 12, steps: '١٢ خطوة', cat: 'العروض التقديمية', tags: ['شرائح', 'سرد'], updated: 'قبل ٣ أيام', u: 3 }, star(false)),
+      Object.assign({ iconCls: 'ph ph-calendar-check', title: 'خطة محتوى شهرية', desc: 'التخطيط لمحتوى شهر كامل عبر القنوات مع جدول نشر واضح.', stepsN: 9, steps: '٩ خطوات', cat: 'الكتابة', tags: ['محتوى', 'جدولة'], updated: 'قبل ٤ أيام', u: 4 }, star(false)),
+      Object.assign({ iconCls: 'ph ph-article', title: 'كتابة دراسة حالة', desc: 'توثيق قصة نجاح عميل بأسلوب قصصي مهني قابل للنشر.', stepsN: 7, steps: '٧ خطوات', cat: 'الكتابة', tags: ['عملاء', 'قصص نجاح'], updated: 'قبل أسبوع', u: 5 }, star(false)),
+      Object.assign({ iconCls: 'ph ph-binoculars', title: 'ملخص بحث سوقي', desc: 'تكثيف تقارير السوق الطويلة في ملخص قابل للتنفيذ.', stepsN: 6, steps: '٦ خطوات', cat: 'البحث', tags: ['بحث', 'تلخيص'], updated: 'قبل أسبوعين', u: 6 }, star(true)),
+      Object.assign({ iconCls: 'ph ph-scales', title: 'مراجعة مستند قانوني', desc: 'فحص العقود والمستندات لرصد المخاطر والبنود الناقصة.', stepsN: 5, steps: '٥ خطوات', cat: 'المراجعة', tags: ['تدقيق', 'مخاطر'], updated: 'قبل ٣ أسابيع', u: 7 }, star(false)),
+      Object.assign({ iconCls: 'ph ph-chart-pie-slice', title: 'تحليل نتائج استبيان', desc: 'تحويل بيانات الاستبيانات الخام إلى رؤى وقرارات.', stepsN: 7, steps: '٧ خطوات', cat: 'التحليل', tags: ['بيانات', 'رؤى'], updated: 'قبل شهر', u: 8 }, star(false)),
+    ];
+  }
+  renderVals() {
+    const demo = this.props.demoState ?? 'default';
+    const view = this.state.view ?? (this.props.defaultView ?? 'grid');
+    const { query, cat, sort, sortOpen } = this.state;
+    let list = this.data();
+    if (cat !== 'الكل') list = list.filter((w) => w.cat === cat);
+    const q = query.trim();
+    if (q) list = list.filter((w) => (w.title + ' ' + w.desc + ' ' + w.tags.join(' ')).includes(q));
+    if (sort === 'name') list = [...list].sort((a, b) => a.title.localeCompare(b.title, 'ar'));
+    else if (sort === 'steps') list = [...list].sort((a, b) => b.stepsN - a.stepsN);
+    else list = [...list].sort((a, b) => a.u - b.u);
+    const catNames = ['الكل', 'التقارير', 'التحليل', 'الكتابة', 'البحث', 'العروض التقديمية', 'المراجعة'];
+    const cats = catNames.map((c) => ({
+      label: c, sel: c === cat, pick: () => this.setState({ cat: c, sortOpen: false }),
+      border: c === cat ? '1px solid transparent' : '1px solid var(--ab-outline)',
+      bg: c === cat ? 'var(--ab-primary-container)' : 'var(--ab-surface-container-lowest)',
+      fg: c === cat ? 'var(--ab-on-primary-container)' : 'var(--ab-on-surface)',
+    }));
+    const sortDefs = [['updated', 'آخر تحديث'], ['name', 'الاسم'], ['steps', 'عدد الخطوات']];
+    const sortOptions = sortDefs.map(([k, label]) => ({
+      label, pick: () => this.setState({ sort: k, sortOpen: false }),
+      checkCls: k === sort ? 'ph-bold ph-check' : 'ph ph-empty',
+    }));
+    const isLoading = demo === 'loading';
+    const isEmpty = demo === 'empty';
+    const isNoResults = !isLoading && !isEmpty && list.length === 0;
+    const showResults = !isLoading && !isEmpty && list.length > 0;
+    const seg = (on) => on ? { bg: 'var(--ab-primary-container)', fg: 'var(--ab-on-primary-container)' } : { bg: 'transparent', fg: 'var(--ab-on-surface-medium)' };
+    const g = seg(view === 'grid'), l = seg(view === 'list');
+    const nums = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    const arNum = (n) => String(n).split('').map((d) => nums[+d]).join('');
+    return {
+      query, sortOpen, sortOptions, cats, list,
+      countLabel: isEmpty ? 'لا مسارات' : arNum(list.length) + ' من ' + arNum(this.data().length) + ' مسارًا',
+      sortLabel: (sortDefs.find(([k]) => k === sort) || [])[1],
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      toggleSort: () => this.setState((s) => ({ sortOpen: !s.sortOpen })),
+      clearFilters: () => this.setState({ query: '', cat: 'الكل' }),
+      setGrid: () => this.setState({ view: 'grid' }),
+      setList: () => this.setState({ view: 'list' }),
+      isLoading, isEmpty, isNoResults,
+      showGrid: showResults && view === 'grid',
+      showList: showResults && view === 'list',
+      gridBtnBg: g.bg, gridBtnFg: g.fg, listBtnBg: l.bg, listBtnFg: l.fg,
+      skeletons: [1, 2, 3, 4, 5, 6],
+    };
+  }
+}
+</script>
+</body>
+</html>

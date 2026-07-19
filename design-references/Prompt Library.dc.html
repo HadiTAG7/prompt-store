@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/styles.css">
+<script src="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>html{direction:rtl} body{margin:0;background:var(--ab-surface);font-family:var(--font-family-base)} a{color:var(--ab-primary);text-decoration:none} a:hover{color:var(--ab-secondary)} *{box-sizing:border-box} ::placeholder{color:var(--ab-on-surface-low)} @keyframes ab-toast{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}</style>
+</helmet>
+<div dir="rtl" data-screen-label="مكتبة البرومبتات" style="display:flex;min-height:100vh;align-items:stretch">
+  <dc-import name="Sidebar" active="library" hint-size="264px,900px" style="flex:none"></dc-import>
+  <main style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <header style="height:64px;background:var(--ab-surface-container-lowest);border-bottom:1px solid var(--ab-outline-variant);display:flex;align-items:center;gap:12px;padding:0 32px;flex:none;position:sticky;top:0;z-index:5">
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.SearchField" placeholder="ابحث في المسارات والبرومبتات" style="width:400px;height:40px" hint-size="400px,40px"></x-import>
+      <span style="flex:1"></span>
+      <button title="إنشاء سريع" style="width:40px;height:40px;border-radius:9999px;border:none;background:var(--ab-primary-container);color:var(--ab-on-primary-container);display:inline-flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--ab-secondary-container)"><i class="ph ph-plus" style="font-size:20px"></i></button>
+      <button title="المظهر الداكن" style="width:40px;height:40px;border-radius:9999px;border:none;background:transparent;color:var(--ab-on-surface-medium);display:inline-flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--ab-surface-container)"><i class="ph ph-moon" style="font-size:20px"></i></button>
+      <span style="width:1px;height:24px;background:var(--ab-outline-variant)"></span>
+      <button style="display:flex;align-items:center;gap:8px;border:none;background:transparent;padding:4px;border-radius:9999px;cursor:pointer" style-hover="background:var(--ab-surface-container)">
+        <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Avatar" type="initials" initials="س" size="sm" hint-size="32px,32px"></x-import>
+        <i class="ph ph-caret-down" style="font-size:14px;color:var(--ab-on-surface-low)"></i>
+      </button>
+    </header>
+    <div style="padding:32px;display:flex;flex-direction:column;gap:20px;max-width:1240px;width:100%;margin:0 auto">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div>
+          <h1 style="margin:0;font-size:28px;line-height:40px;font-weight:700;color:var(--ab-on-surface)">مكتبة البرومبتات</h1>
+          <p style="margin:2px 0 0;font-size:14.5px;color:var(--ab-on-surface-medium)">برومبتات مستقلة قابلة لإعادة الاستخدام — انسخها أو أضفها إلى أي مسار.</p>
+        </div>
+        <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="إنشاء برومبت" size="medium" leading-icon="plus" hint-size="auto,40px"></x-import>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="position:relative;width:300px">
+          <i class="ph ph-magnifying-glass" style="position:absolute;inset-inline-start:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ab-on-surface-low)"></i>
+          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="ابحث في البرومبتات" aria-label="بحث في البرومبتات" style="width:100%;height:40px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface-container-lowest);padding:0 42px 0 14px;font-family:var(--font-family-base);font-size:14px;color:var(--ab-on-surface);outline:none" style-focus="border-color:transparent;box-shadow:inset 0 0 0 3px var(--ab-secondary)">
+        </div>
+        <span style="flex:1"></span>
+        <button onClick="{{ toggleFavs }}" style="height:36px;border-radius:9999px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--font-family-base);font-weight:500;font-size:13.5px;border:{{ favBorder }};background:{{ favBg }};color:{{ favFg }}"><i class="{{ favIcon }}" style="font-size:15px"></i>المفضلة فقط</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7">
+          <button onClick="{{ c.pick }}" style="height:34px;border-radius:9999px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--font-family-base);font-weight:500;font-size:13.5px;border:{{ c.border }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}<span style="font-size:11.5px;opacity:.75">{{ c.count }}</span></button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:56px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+          <span style="width:56px;height:56px;border-radius:9999px;background:var(--ab-surface-container);display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-magnifying-glass" style="font-size:26px;color:var(--ab-on-surface-medium)"></i></span>
+          <div style="font-size:17px;font-weight:600;color:var(--ab-on-surface)">لا توجد برومبتات مطابقة</div>
+          <button onClick="{{ clearFilters }}" style="margin-top:6px;height:36px;border-radius:12px;border:none;background:var(--ab-primary-container);color:var(--ab-on-primary-container);padding:0 16px;font-family:var(--font-family-base);font-weight:500;font-size:14px;cursor:pointer">مسح عوامل التصفية</button>
+        </div>
+      </sc-if>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px">
+        <sc-for list="{{ list }}" as="p" hint-placeholder-count="6">
+          <article style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;transition:box-shadow 120ms ease" style-hover="box-shadow:var(--ab-shadow-md)">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:12px;line-height:20px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium)">{{ p.cat }}</span>
+              <span style="font-size:12px;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;gap:4px"><i class="ph ph-brackets-curly" style="font-size:13px;color:var(--ab-primary)"></i>{{ p.vars }}</span>
+              <span style="flex:1"></span>
+              <button title="مفضلة" onClick="{{ p.toggleFav }}" style="width:30px;height:30px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:{{ p.starFg }};display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container)"><i class="{{ p.starCls }}" style="font-size:17px"></i></button>
+            </div>
+            <div style="font-size:15.5px;font-weight:600;color:var(--ab-on-surface)">{{ p.title }}</div>
+            <div style="background:var(--ab-surface);border:1px solid var(--ab-outline-variant);border-radius:10px;padding:10px 12px;font-size:13px;line-height:22px;color:var(--ab-on-surface-medium);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ p.text }}</div>
+            <div style="display:flex;align-items:center;gap:8px;border-top:1px solid var(--ab-outline-variant);padding-top:12px;margin-top:auto">
+              <button onClick="{{ p.copy }}" style="height:32px;border:none;border-radius:8px;padding:0 12px;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-family-base);font-size:12.5px;font-weight:500;cursor:pointer;background:{{ p.copyBg }};color:{{ p.copyFg }};transition:background 120ms ease"><i class="{{ p.copyIcon }}" style="font-size:14px"></i>{{ p.copyLabel }}</button>
+              <button style="height:32px;border:1px solid var(--ab-outline-variant);border-radius:8px;background:transparent;padding:0 12px;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-family-base);font-size:12.5px;font-weight:500;color:var(--ab-on-surface);cursor:pointer" style-hover="background:var(--ab-surface-container-low)"><i class="ph ph-pencil-simple" style="font-size:14px"></i>تعديل</button>
+              <span style="flex:1"></span>
+              <button style="height:32px;border:none;border-radius:8px;background:transparent;padding:0 10px;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-family-base);font-size:12.5px;font-weight:500;color:var(--ab-primary);cursor:pointer" style-hover="background:var(--ab-primary-container)"><i class="ph ph-flow-arrow" style="font-size:14px"></i>إضافة إلى مسار</button>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </main>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:28px;left:50%;transform:translate(-50%,0);background:var(--ab-inverse-surface);color:var(--ab-inverse-on-surface);border-radius:12px;padding:10px 18px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;box-shadow:var(--ab-shadow-lg);z-index:60;animation:ab-toast 160ms ease">
+      <i class="ph-fill ph-check-circle" style="font-size:17px;color:#7bd8b0"></i>{{ toast }}
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { query: '', cat: 'الكل', favsOnly: false, copiedId: 0, toast: null, favs: { 1: true, 5: true } };
+  data() {
+    return [
+      { id: 1, title: 'ملخص تنفيذي لتقرير', cat: 'التقارير', varsN: 2, text: 'لخّص التقرير التالي في صفحة واحدة تتضمن أبرز النتائج والأرقام والتوصيات، موجهة إلى {{الجمهور_المستهدف}} وبنبرة {{نبرة_الكتابة}}.' },
+      { id: 2, title: 'تحليل سوات (SWOT)', cat: 'التحليل', varsN: 2, text: 'أجرِ تحليل نقاط القوة والضعف والفرص والتهديدات لـ{{اسم_الشركة}} في قطاع {{القطاع}} مع ثلاث نقاط لكل محور ودليل موجز.' },
+      { id: 3, title: 'إعادة صياغة احترافية', cat: 'الكتابة', varsN: 1, text: 'أعد صياغة النص التالي بأسلوب مهني واضح مع الحفاظ على المعنى وتقليل الحشو: {{النص}}.' },
+      { id: 4, title: 'أسئلة مقابلة بحثية', cat: 'البحث', varsN: 1, text: 'اقترح عشرة أسئلة لمقابلة شبه منظمة حول {{موضوع_البحث}} متدرجة من العام إلى الخاص، مع سؤال متابعة لكل سؤال.' },
+      { id: 5, title: 'مخطط عرض تقديمي', cat: 'العروض التقديمية', varsN: 2, text: 'أنشئ مخطط عرض من {{عدد_الشرائح}} شريحة عن {{الموضوع}} ببنية سردية واضحة: سياق، مشكلة، حل، أثر، خطوات تالية.' },
+      { id: 6, title: 'مراجعة لغوية دقيقة', cat: 'المراجعة', varsN: 1, text: 'راجع النص التالي لغويًا وإملائيًا وأسلوبيًا، واعرض التصحيحات في جدول من عمودين قبل/بعد: {{النص}}.' },
+      { id: 7, title: 'رسالة متابعة عميل', cat: 'الكتابة', varsN: 2, text: 'اكتب رسالة متابعة مهذبة لعميل بعد اجتماع حول {{موضوع_الاجتماع}}، تلخص الاتفاقات وتحدد {{الخطوات_التالية}}.' },
+      { id: 8, title: 'تفسير بيانات جدول', cat: 'التحليل', varsN: 1, text: 'فسّر الجدول التالي {{الجدول}} واستخرج ثلاث رؤى قابلة للتنفيذ مع الإشارة إلى مستوى الثقة في كل رؤية.' },
+    ];
+  }
+  flash(msg) { clearTimeout(this._t); this.setState({ toast: msg }); this._t = setTimeout(() => this.setState({ toast: null, copiedId: 0 }), 2000); }
+  renderVals() {
+    const nums = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    const ar = (n) => String(n).split('').map((d) => nums[+d]).join('');
+    const { query, cat, favsOnly, copiedId, toast, favs } = this.state;
+    const all = this.data();
+    let list = all;
+    if (cat !== 'الكل') list = list.filter((p) => p.cat === cat);
+    if (favsOnly) list = list.filter((p) => favs[p.id]);
+    const q = query.trim();
+    if (q) list = list.filter((p) => (p.title + ' ' + p.text).includes(q));
+    const catNames = ['الكل', 'التقارير', 'التحليل', 'الكتابة', 'البحث', 'العروض التقديمية', 'المراجعة'];
+    const cats = catNames.map((c) => ({
+      label: c, count: ar(c === 'الكل' ? all.length : all.filter((p) => p.cat === c).length),
+      pick: () => this.setState({ cat: c }),
+      border: c === cat ? '1px solid transparent' : '1px solid var(--ab-outline)',
+      bg: c === cat ? 'var(--ab-primary-container)' : 'var(--ab-surface-container-lowest)',
+      fg: c === cat ? 'var(--ab-on-primary-container)' : 'var(--ab-on-surface)',
+    }));
+    return {
+      query, toast, cats,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      toggleFavs: () => this.setState({ favsOnly: !favsOnly }),
+      clearFilters: () => this.setState({ query: '', cat: 'الكل', favsOnly: false }),
+      favBorder: favsOnly ? '1px solid transparent' : '1px solid var(--ab-outline)',
+      favBg: favsOnly ? 'var(--ab-gold-container)' : 'var(--ab-surface-container-lowest)',
+      favFg: favsOnly ? 'var(--ab-gold)' : 'var(--ab-on-surface)',
+      favIcon: favsOnly ? 'ph-fill ph-star' : 'ph ph-star',
+      noResults: list.length === 0,
+      list: list.map((p) => {
+        const fav = !!favs[p.id], copied = copiedId === p.id;
+        return Object.assign({}, p, {
+          vars: p.varsN === 1 ? 'متغير واحد' : 'متغيران',
+          starCls: fav ? 'ph-fill ph-star' : 'ph ph-star',
+          starFg: fav ? 'var(--ab-gold)' : 'var(--ab-on-surface-low)',
+          toggleFav: () => this.setState({ favs: Object.assign({}, favs, { [p.id]: !fav }) }),
+          copyLabel: copied ? 'تم النسخ' : 'نسخ',
+          copyIcon: copied ? 'ph-bold ph-check' : 'ph ph-copy',
+          copyBg: copied ? 'var(--ab-success-container)' : 'var(--ab-primary)',
+          copyFg: copied ? 'var(--ab-success)' : 'var(--ab-on-primary)',
+          copy: () => { try { navigator.clipboard.writeText(p.text); } catch (e) {} this.setState({ copiedId: p.id }); this.flash('تم نسخ البرومبت إلى الحافظة'); },
+        });
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

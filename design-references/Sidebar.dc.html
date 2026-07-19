@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/styles.css">
+<script src="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>body{margin:0;font-family:var(--font-family-base)} a{color:var(--ab-primary);text-decoration:none} a:hover{color:var(--ab-secondary)} *{box-sizing:border-box}</style>
+</helmet>
+<nav dir="rtl" data-screen-label="Sidebar" style="width:264px;height:100vh;position:sticky;top:0;background:var(--ab-surface-container-lowest);border-inline-end:1px solid var(--ab-outline-variant);display:flex;flex-direction:column;padding:20px 16px;gap:20px;flex:none">
+  <a href="Dashboard.dc.html" style="display:flex;align-items:center;gap:10px;padding:0 4px">
+    <span style="width:32px;height:32px;border-radius:8px;background:var(--ab-primary);display:inline-flex;align-items:center;justify-content:center;flex:none"><i class="ph-fill ph-stack" style="font-size:18px;color:var(--ab-on-primary)"></i></span>
+    <span style="font-weight:700;font-size:17px;color:var(--ab-on-surface)">مخزن البرومبتات</span>
+  </a>
+  <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="إنشاء مسار جديد" size="medium" leading-icon="plus" full-width="{{ true }}" hint-size="100%,40px"></x-import>
+  <div style="display:flex;flex-direction:column;gap:2px">
+    <sc-for list="{{ items }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" aria-current="{{ item.aria }}" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:12px;background:{{ item.bg }};color:{{ item.fg }};font-size:15px;font-weight:{{ item.wt }}" style-hover="background:{{ item.hoverBg }};color:{{ item.fg }}" style-focus="outline:3px solid var(--ab-secondary);outline-offset:-1px">
+        <i class="{{ item.iconCls }}" style="font-size:20px"></i>
+        <span style="flex:1">{{ item.label }}</span>
+        <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;line-height:20px;padding:0 8px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium)">{{ item.badge }}</span></sc-if>
+      </a>
+    </sc-for>
+  </div>
+  <div style="flex:1"></div>
+  <div style="display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--ab-outline-variant);padding-top:12px">
+    <span style="font-size:11px;line-height:20px;color:var(--ab-on-surface-low);padding:0 12px">ملفات التصميم</span>
+    <a href="Design System.dc.html" style="display:flex;align-items:center;gap:12px;height:36px;padding:0 12px;border-radius:12px;color:var(--ab-on-surface-medium);font-size:13.5px" style-hover="background:var(--ab-surface-container-low)"><i class="ph ph-swatches" style="font-size:18px"></i>نظام التصميم</a>
+    <a href="Mobile.dc.html" style="display:flex;align-items:center;gap:12px;height:36px;padding:0 12px;border-radius:12px;color:var(--ab-on-surface-medium);font-size:13.5px" style-hover="background:var(--ab-surface-container-low)"><i class="ph ph-device-mobile" style="font-size:18px"></i>نسخة الجوال</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:var(--ab-surface)" style-hover="background:var(--ab-surface-container-low)">
+    <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Avatar" type="initials" initials="س" size="sm" hint-size="32px,32px"></x-import>
+    <span style="display:flex;flex-direction:column;flex:1;min-width:0">
+      <span style="font-size:13.5px;font-weight:500;color:var(--ab-on-surface)">سارة العتيبي</span>
+      <span style="font-size:12px;color:var(--ab-on-surface-low)">فريق الاستشارات</span>
+    </span>
+    <i class="ph ph-caret-up-down" style="font-size:16px;color:var(--ab-on-surface-low)"></i>
+  </div>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:264,&quot;height&quot;:900},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;dashboard&quot;,&quot;options&quot;:[&quot;dashboard&quot;,&quot;workflows&quot;,&quot;library&quot;,&quot;categories&quot;,&quot;favorites&quot;,&quot;settings&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const active = this.props.active ?? 'dashboard';
+    const defs = [
+      { key: 'dashboard', icon: 'squares-four', label: 'لوحة التحكم', href: 'Dashboard.dc.html' },
+      { key: 'workflows', icon: 'flow-arrow', label: 'مسارات العمل', href: 'Workflows.dc.html', badge: '١٢' },
+      { key: 'library', icon: 'books', label: 'مكتبة البرومبتات', href: 'Prompt Library.dc.html' },
+      { key: 'categories', icon: 'tag', label: 'التصنيفات', href: 'Workflows.dc.html' },
+      { key: 'favorites', icon: 'star', label: 'المفضلة', href: 'Workflows.dc.html' },
+      { key: 'settings', icon: 'gear-six', label: 'الإعدادات', href: '#' },
+    ];
+    const items = defs.map((it) => {
+      const sel = it.key === active;
+      return Object.assign({}, it, {
+        aria: sel ? 'page' : undefined,
+        iconCls: (sel ? 'ph-fill' : 'ph') + ' ph-' + it.icon,
+        bg: sel ? 'var(--ab-primary-container)' : 'transparent',
+        fg: sel ? 'var(--ab-on-primary-container)' : 'var(--ab-on-surface-medium)',
+        wt: sel ? 600 : 400,
+        hoverBg: sel ? 'var(--ab-primary-container)' : 'var(--ab-surface-container-low)',
+      });
+    });
+    return { items };
+  }
+}
+</script>
+</body>
+</html>

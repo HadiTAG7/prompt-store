@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/styles.css">
+<script src="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>html{direction:rtl} body{margin:0;background:var(--ab-surface);font-family:var(--font-family-base)} a{color:var(--ab-primary);text-decoration:none} a:hover{color:var(--ab-secondary)} *{box-sizing:border-box} @keyframes ab-shimmer{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}</style>
+</helmet>
+<div dir="rtl" data-screen-label="نظام التصميم" style="max-width:1180px;margin:0 auto;padding:40px 32px 80px;display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div>
+      <a href="Dashboard.dc.html" style="font-size:13px;display:inline-flex;align-items:center;gap:5px;color:var(--ab-on-surface-medium)"><i class="ph ph-arrow-right" style="font-size:14px"></i>العودة إلى التطبيق</a>
+      <h1 style="margin:6px 0 0;font-size:30px;line-height:42px;font-weight:700;color:var(--ab-on-surface)">نظام تصميم «مخزن البرومبتات»</h1>
+      <p style="margin:4px 0 0;font-size:15px;color:var(--ab-on-surface-medium)">مبني على نظام أبيان — Rubik، لوحة محايدة بلون مميز واحد، زوايا ١٢ وظلال ناعمة.</p>
+    </div>
+  </div>
+  <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px">
+    <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">الألوان</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px">
+      <sc-for list="{{ colors }}" as="c" hint-placeholder-count="10">
+        <div style="border:1px solid var(--ab-outline-variant);border-radius:12px;overflow:hidden">
+          <div style="height:56px;background:{{ c.val }};border-bottom:1px solid var(--ab-outline-variant)"></div>
+          <div style="padding:8px 10px"><div style="font-size:12.5px;font-weight:600;color:var(--ab-on-surface)">{{ c.name }}</div><div style="font-size:11px;color:var(--ab-on-surface-low);direction:ltr;text-align:right">{{ c.code }}</div></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+    <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px">
+      <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">مقياس الخط العربي — Rubik</h2>
+      <sc-for list="{{ type }}" as="t" hint-placeholder-count="6">
+        <div style="display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--ab-outline-variant);padding-bottom:10px">
+          <span style="width:110px;flex:none;font-size:11.5px;color:var(--ab-on-surface-low);direction:ltr;text-align:right">{{ t.spec }}</span>
+          <span style="font-size:{{ t.size }};line-height:1.5;font-weight:{{ t.wt }};color:var(--ab-on-surface);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.sample }}</span>
+        </div>
+      </sc-for>
+    </section>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">المسافات — شبكة ٨ بكسل</h2>
+        <div style="display:flex;align-items:flex-end;gap:10px">
+          <sc-for list="{{ spaces }}" as="s" hint-placeholder-count="7">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:{{ s.px }};height:{{ s.px }};background:var(--ab-primary-container);border-radius:4px"></span><span style="font-size:11px;color:var(--ab-on-surface-low)">{{ s.label }}</span></div>
+          </sc-for>
+        </div>
+      </section>
+      <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">الزوايا والظلال</h2>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <sc-for list="{{ radii }}" as="r" hint-placeholder-count="5">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:56px;height:56px;background:var(--ab-surface-container);border:1px solid var(--ab-outline);border-radius:{{ r.val }}"></span><span style="font-size:11px;color:var(--ab-on-surface-low)">{{ r.label }}</span></div>
+          </sc-for>
+          <span style="width:1px;height:56px;background:var(--ab-outline-variant)"></span>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:56px;height:56px;background:#fff;border-radius:12px;box-shadow:var(--ab-shadow-sm)"></span><span style="font-size:11px;color:var(--ab-on-surface-low)">sm</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:56px;height:56px;background:#fff;border-radius:12px;box-shadow:var(--ab-shadow-md)"></span><span style="font-size:11px;color:var(--ab-on-surface-low)">md</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:56px;height:56px;background:#fff;border-radius:12px;box-shadow:var(--ab-shadow-lg)"></span><span style="font-size:11px;color:var(--ab-on-surface-low)">lg</span></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px">
+    <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">الأزرار</h2>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="أساسي" size="medium" hint-size="auto,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="أساسي هادئ" size="medium" emphasis="high" hint-size="auto,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="نصي" size="medium" emphasis="low" hint-size="auto,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="محايد" size="medium" variant="neutral" emphasis="high" hint-size="auto,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="حذف" size="medium" variant="danger" hint-size="auto,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="معطّل" size="medium" disabled="{{ true }}" hint-size="auto,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="مع أيقونة" size="medium" leading-icon="plus" hint-size="auto,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" leading-icon="star" icon-only="{{ true }}" size="medium" variant="neutral" emphasis="high" hint-size="40px,40px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="صغير" size="small" hint-size="auto,32px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="كبير" size="large" hint-size="auto,48px"></x-import>
+    </div>
+    <p style="margin:0;font-size:12.5px;color:var(--ab-on-surface-low)">التحويم يضيف طبقة حالة ٨٪، والضغط ١٦٪، والتعطيل شفافية ٣٨٪ — دون تبديل الألوان.</p>
+  </section>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+    <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px">
+      <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">حقول الإدخال</h2>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.InputField" label="اسم المسار" placeholder="أدخل اسم المسار" hint-size="100%,60px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.InputField" label="اسم المسار" default-value="بناء تقرير تنفيذي" supporting-text="اضغط داخل الحقل لرؤية حلقة التركيز" hint-size="100%,80px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.InputField" label="التصنيف" default-value="" error="{{ true }}" supporting-text="هذا الحقل مطلوب" hint-size="100%,80px"></x-import>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.InputField" label="معطّل" placeholder="غير متاح" disabled="{{ true }}" hint-size="100%,60px"></x-import>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">محرر البرومبت — المتغيرات مميزة بصريًا</span>
+        <div style="border:1px solid var(--ab-outline-variant);border-radius:12px;background:var(--ab-surface);padding:12px 14px;font-size:14.5px;line-height:30px;color:var(--ab-on-surface)">أنشئ تقريرًا تنفيذيًا عن <span style="background:var(--ab-primary-container);color:var(--ab-on-primary-container);border-radius:6px;padding:2px 7px;font-size:13px;font-weight:500">اسم_الشركة</span> للفترة <span style="background:var(--ab-primary-container);color:var(--ab-on-primary-container);border-radius:6px;padding:2px 7px;font-size:13px;font-weight:500">الفترة_الزمنية</span>.</div>
+      </div>
+    </section>
+    <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px">
+      <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">عناصر الشريط الجانبي وحالة الخطوات</h2>
+      <div style="display:flex;flex-direction:column;gap:2px;max-width:260px">
+        <span style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:12px;background:var(--ab-primary-container);color:var(--ab-on-primary-container);font-size:15px;font-weight:600"><i class="ph-fill ph-squares-four" style="font-size:20px"></i>محدد</span>
+        <span style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:12px;background:var(--ab-surface-container-low);color:var(--ab-on-surface-medium);font-size:15px"><i class="ph ph-flow-arrow" style="font-size:20px"></i>تحويم</span>
+        <span style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:12px;color:var(--ab-on-surface-medium);font-size:15px"><i class="ph ph-books" style="font-size:20px"></i>افتراضي</span>
+        <span style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:12px;color:var(--ab-on-surface-medium);font-size:15px;outline:3px solid var(--ab-secondary);outline-offset:-1px"><i class="ph ph-star" style="font-size:20px"></i>تركيز لوحة المفاتيح</span>
+      </div>
+      <div style="border-top:1px solid var(--ab-outline-variant);padding-top:14px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:28px;height:28px;border-radius:9999px;background:var(--ab-success);color:#fff;display:inline-flex;align-items:center;justify-content:center"><i class="ph-bold ph-check" style="font-size:13px"></i></span><span style="font-size:14px;color:var(--ab-on-surface)">خطوة مكتملة</span><span style="font-size:11.5px;line-height:18px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-success-container);color:var(--ab-success)">مكتملة</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:28px;height:28px;border-radius:9999px;background:var(--ab-primary);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;box-shadow:0 0 0 4px var(--ab-primary-container)">٣</span><span style="font-size:14px;font-weight:600;color:var(--ab-on-surface)">الخطوة الحالية</span><span style="font-size:11.5px;line-height:18px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-primary-container);color:var(--ab-on-primary-container)">الحالية</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:28px;height:28px;border-radius:9999px;border:1.5px solid var(--ab-outline);color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">٤</span><span style="font-size:14px;color:var(--ab-on-surface-medium)">خطوة قادمة</span><span style="font-size:11.5px;line-height:18px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium)">قادمة</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:28px;height:28px;border-radius:9999px;background:var(--ab-danger);color:#fff;display:inline-flex;align-items:center;justify-content:center"><i class="ph-bold ph-warning" style="font-size:13px"></i></span><span style="font-size:14px;color:var(--ab-danger)">خطوة بها خطأ</span><span style="font-size:11.5px;line-height:18px;font-weight:500;padding:2px 10px;border-radius:9999px;background:var(--ab-danger-container);color:var(--ab-danger)">تحتاج إصلاحًا</span></div>
+      </div>
+      <div style="border-top:1px solid var(--ab-outline-variant);padding-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <span style="font-size:12.5px;line-height:20px;font-weight:500;padding:2px 12px;border-radius:9999px;background:var(--ab-primary-container);color:var(--ab-on-primary-container)">تصنيف</span>
+        <span style="font-size:12.5px;line-height:20px;padding:2px 12px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium)">وسم</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;font-size:12.5px;line-height:20px;padding:2px 6px 2px 12px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium)">قابل للإزالة<i class="ph ph-x" style="font-size:11px"></i></span>
+        <span style="font-size:12.5px;line-height:20px;font-weight:500;padding:2px 12px;border-radius:9999px;background:var(--ab-gold-container);color:var(--ab-gold)">تحذير</span>
+        <span style="font-size:12.5px;line-height:20px;font-weight:500;padding:2px 12px;border-radius:9999px;background:var(--ab-success-container);color:var(--ab-success)">نجاح</span>
+      </div>
+    </section>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:start">
+    <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px">
+      <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">قائمة منسدلة وحوار</h2>
+      <div style="min-width:180px;border:1px solid var(--ab-outline-variant);border-radius:12px;box-shadow:var(--ab-shadow-md);padding:6px;display:flex;flex-direction:column;background:var(--ab-surface-container-lowest)">
+        <span style="display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;border-radius:8px;font-size:14px;color:var(--ab-on-surface)"><i class="ph-bold ph-check" style="font-size:15px;color:var(--ab-primary)"></i>آخر تحديث</span>
+        <span style="display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;border-radius:8px;font-size:14px;color:var(--ab-on-surface);background:var(--ab-surface-container-low)"><span style="width:15px"></span>الاسم</span>
+        <span style="display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;border-radius:8px;font-size:14px;color:var(--ab-on-surface)"><span style="width:15px"></span>عدد الخطوات</span>
+      </div>
+      <div style="border:1px solid var(--ab-outline-variant);border-radius:20px;padding:20px;box-shadow:var(--ab-shadow-lg);display:flex;flex-direction:column;gap:10px;background:var(--ab-surface-container-lowest)">
+        <span style="font-size:17px;font-weight:700;color:var(--ab-on-surface);text-align:center">حذف المسار؟</span>
+        <span style="font-size:13.5px;line-height:20px;color:var(--ab-on-surface-medium);text-align:center">سيتم حذف «تحليل منافسين» وجميع خطواته نهائيًا.</span>
+        <button style="height:40px;border:none;border-radius:12px;background:var(--ab-danger);color:#fff;font-family:var(--font-family-base);font-size:14px;font-weight:500;cursor:pointer">حذف نهائي</button>
+        <button style="height:36px;border:none;border-radius:12px;background:transparent;color:var(--ab-on-surface);font-family:var(--font-family-base);font-size:14px;font-weight:500;cursor:pointer">إلغاء</button>
+      </div>
+    </section>
+    <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px">
+      <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">تنبيهات وحالات الحفظ</h2>
+      <div style="background:var(--ab-inverse-surface);color:var(--ab-inverse-on-surface);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500"><i class="ph-fill ph-check-circle" style="font-size:16px;color:#7bd8b0"></i>تم نسخ البرومبت إلى الحافظة</div>
+      <div style="background:var(--ab-inverse-surface);color:var(--ab-inverse-on-surface);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500"><i class="ph-fill ph-warning" style="font-size:16px;color:var(--ab-gold)"></i>بعض المتغيرات المطلوبة ناقصة</div>
+      <div style="background:var(--ab-inverse-surface);color:var(--ab-inverse-on-surface);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500"><i class="ph-fill ph-x-circle" style="font-size:16px;color:#f2a0a8"></i>تعذر حفظ التغييرات</div>
+      <div style="border-top:1px solid var(--ab-outline-variant);padding-top:10px;display:flex;flex-direction:column;gap:8px">
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ab-on-surface-medium)"><i class="ph ph-cloud-arrow-up" style="font-size:16px"></i>جارٍ الحفظ التلقائي…</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ab-success)"><i class="ph-fill ph-cloud-check" style="font-size:16px"></i>تم الحفظ تلقائيًا الآن</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ab-gold)"><span style="width:8px;height:8px;border-radius:9999px;background:var(--ab-gold)"></span>تغييرات غير محفوظة</span>
+      </div>
+    </section>
+    <section style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px">
+      <h2 style="margin:0;font-size:17px;font-weight:600;color:var(--ab-on-surface)">حالة فارغة وهيكل تحميل</h2>
+      <div style="border:1px dashed var(--ab-outline);border-radius:12px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+        <span style="width:44px;height:44px;border-radius:9999px;background:var(--ab-primary-container);display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-flow-arrow" style="font-size:22px;color:var(--ab-on-primary-container)"></i></span>
+        <span style="font-size:14px;font-weight:600;color:var(--ab-on-surface)">لا توجد مسارات بعد</span>
+        <span style="font-size:12.5px;color:var(--ab-on-surface-medium)">ابدأ بإنشاء أول مسار عمل لك.</span>
+      </div>
+      <div style="border:1px solid var(--ab-outline-variant);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;animation:ab-shimmer 1.4s ease-in-out infinite">
+        <div style="display:flex;gap:10px;align-items:center"><span style="width:36px;height:36px;border-radius:9px;background:var(--ab-surface-container)"></span><span style="flex:1;height:12px;border-radius:6px;background:var(--ab-surface-container)"></span></div>
+        <span style="height:9px;border-radius:6px;background:var(--ab-surface-container);width:85%"></span>
+        <span style="height:9px;border-radius:6px;background:var(--ab-surface-container);width:60%"></span>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colors: [
+        { name: 'أساسي', val: 'var(--ab-primary)', code: 'rgb(54,70,232)' },
+        { name: 'حاوية الأساسي', val: 'var(--ab-primary-container)', code: 'rgb(209,221,255)' },
+        { name: 'ثانوي', val: 'var(--ab-secondary)', code: 'rgb(0,99,183)' },
+        { name: 'نجاح', val: 'var(--ab-success)', code: 'rgb(31,116,87)' },
+        { name: 'تحذير', val: 'var(--ab-gold)', code: 'rgb(182,156,82)' },
+        { name: 'خطر', val: 'var(--ab-danger)', code: 'rgb(178,36,50)' },
+        { name: 'الخلفية', val: 'var(--ab-surface)', code: 'rgb(245,249,254)' },
+        { name: 'سطح البطاقات', val: 'var(--ab-surface-container-lowest)', code: 'rgb(255,255,255)' },
+        { name: 'النص', val: 'var(--ab-on-surface)', code: 'rgb(23,27,32)' },
+        { name: 'نص خافت', val: 'var(--ab-on-surface-low)', code: 'rgb(109,114,121)' },
+        { name: 'الحدود', val: 'var(--ab-outline-variant)', code: 'rgb(215,223,233)' },
+      ],
+      type: [
+        { spec: 'Display · 32/40 · 700', size: '32px', wt: 700, sample: 'مرحبًا، لنبدأ العمل' },
+        { spec: 'Title · 28/40 · 700', size: '28px', wt: 700, sample: 'مسارات العمل' },
+        { spec: 'Heading · 24/36 · 600', size: '24px', wt: 600, sample: 'تحديد هيكل التقرير' },
+        { spec: 'Body · 16/28 · 400', size: '16px', wt: 400, sample: 'أنشئ مسارات منظمة وحوّل المهام المعقدة إلى خطوات واضحة.' },
+        { spec: 'Callout · 14/20 · 500', size: '14px', wt: 500, sample: 'آخر تعديل قبل ساعتين' },
+        { spec: 'Label · 12/20 · 400', size: '12px', wt: 400, sample: '١٠ خطوات · التقارير' },
+      ],
+      spaces: [4, 8, 12, 16, 24, 32, 48].map((n) => ({ px: n + 'px', label: n })),
+      radii: [['xs', '4px'], ['sm', '8px'], ['md', '12px'], ['lg', '16px'], ['pill', '9999px']].map(([label, val]) => ({ label, val })),
+    };
+  }
+}
+</script>
+</body>
+</html>

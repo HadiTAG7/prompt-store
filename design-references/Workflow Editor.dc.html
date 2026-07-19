@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/styles.css">
+<script src="_ds/abyan-capital-design-system-019e2603-b2e5-7cb6-93df-a58d6979d6a0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>html{direction:rtl} body{margin:0;background:var(--ab-surface);font-family:var(--font-family-base)} a{color:var(--ab-primary);text-decoration:none} a:hover{color:var(--ab-secondary)} *{box-sizing:border-box} ::placeholder{color:var(--ab-on-surface-low)} textarea:focus,input:focus{border-color:transparent !important;box-shadow:inset 0 0 0 3px var(--ab-secondary);outline:none}</style>
+</helmet>
+<div dir="rtl" data-screen-label="محرر المسار" style="display:flex;min-height:100vh;align-items:stretch">
+  <dc-import name="Sidebar" active="workflows" hint-size="264px,900px" style="flex:none"></dc-import>
+  <main style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <header style="height:64px;background:var(--ab-surface-container-lowest);border-bottom:1px solid var(--ab-outline-variant);display:flex;align-items:center;gap:12px;padding:0 32px;flex:none;position:sticky;top:0;z-index:10">
+      <nav style="display:flex;align-items:center;gap:8px;font-size:13.5px;min-width:0">
+        <a href="Workflows.dc.html" style="color:var(--ab-on-surface-medium)">مسارات العمل</a>
+        <i class="ph ph-caret-left" style="font-size:12px;color:var(--ab-on-surface-low)"></i>
+        <a href="Workflow Details.dc.html" style="color:var(--ab-on-surface-medium)">بناء تقرير تنفيذي</a>
+        <i class="ph ph-caret-left" style="font-size:12px;color:var(--ab-on-surface-low)"></i>
+        <span style="color:var(--ab-on-surface);font-weight:600">تعديل مسار العمل</span>
+      </nav>
+      <span style="flex:1"></span>
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ab-gold)"><span style="width:8px;height:8px;border-radius:9999px;background:var(--ab-gold)"></span>تغييرات غير محفوظة</span>
+      <span style="font-size:12.5px;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;gap:5px"><i class="ph ph-cloud-check" style="font-size:15px"></i>حفظ تلقائي قبل دقيقتين</span>
+      <span style="width:1px;height:24px;background:var(--ab-outline-variant)"></span>
+      <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="حفظ" size="medium" variant="neutral" emphasis="high" hint-size="auto,40px"></x-import>
+      <a href="Run Workflow.dc.html"><x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Button" label="حفظ وبدء" size="medium" leading-icon="play" hint-size="auto,40px"></x-import></a>
+    </header>
+    <div style="padding:28px 32px 48px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;max-width:1240px;width:100%;margin:0 auto;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <h1 style="margin:0;font-size:20px;font-weight:700;color:var(--ab-on-surface)">خطوات المسار</h1>
+          <span style="font-size:13px;color:var(--ab-on-surface-low)">١٠ خطوات · اسحب لإعادة الترتيب</span>
+        </div>
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+          <article style="background:var(--ab-surface-container-lowest);border:{{ s.border }};border-radius:14px;overflow:hidden">
+            <div onClick="{{ s.toggle }}" style="display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer" style-hover="background:var(--ab-surface)">
+              <span title="اسحب لإعادة الترتيب" style="color:var(--ab-on-surface-low);cursor:grab;display:inline-flex" style-hover="color:var(--ab-on-surface)"><i class="ph ph-dots-six-vertical" style="font-size:18px"></i></span>
+              <span style="width:28px;height:28px;border-radius:9999px;background:{{ s.numBg }};color:{{ s.numFg }};display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex:none">{{ s.num }}</span>
+              <span style="flex:1;min-width:0">
+                <span style="display:block;font-size:15px;font-weight:600;color:{{ s.titleFg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.title }}</span>
+                <sc-if value="{{ s.error }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--ab-danger)"><i class="ph-fill ph-warning-circle" style="font-size:13px"></i>عنوان الخطوة مطلوب</span></sc-if>
+                <sc-if value="{{ s.noError }}" hint-placeholder-val="{{ true }}"><span style="display:block;font-size:12.5px;color:var(--ab-on-surface-low)">{{ s.meta }}</span></sc-if>
+              </span>
+              <button title="نسخ الخطوة" onClick="{{ s.stop }}" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-surface-container);color:var(--ab-on-surface)"><i class="ph ph-copy" style="font-size:16px"></i></button>
+              <button title="حذف الخطوة" onClick="{{ s.stop }}" style="width:32px;height:32px;border:none;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ab-on-surface-low);display:inline-flex;align-items:center;justify-content:center" style-hover="background:var(--ab-danger-container);color:var(--ab-danger)"><i class="ph ph-trash" style="font-size:16px"></i></button>
+              <i class="{{ s.caret }}" style="font-size:16px;color:var(--ab-on-surface-medium)"></i>
+            </div>
+            <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}">
+              <div style="border-top:1px solid var(--ab-outline-variant);padding:18px 16px 16px;display:flex;flex-direction:column;gap:16px">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                  <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">عنوان الخطوة
+                    <input defaultValue="{{ s.title }}" style="height:44px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:0 14px;font-family:var(--font-family-base);font-size:14.5px;color:var(--ab-on-surface)">
+                  </label>
+                  <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">وصف مختصر
+                    <input defaultValue="{{ s.desc }}" style="height:44px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:0 14px;font-family:var(--font-family-base);font-size:14.5px;color:var(--ab-on-surface)">
+                  </label>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">قالب البرومبت</span>
+                    <span style="flex:1"></span>
+                    <button style="height:30px;border-radius:8px;border:1px dashed var(--ab-outline);background:transparent;padding:0 10px;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-family-base);font-size:12.5px;font-weight:500;color:var(--ab-primary);cursor:pointer" style-hover="background:var(--ab-primary-container);border-color:transparent"><i class="ph ph-brackets-curly" style="font-size:14px"></i>إدراج متغير</button>
+                  </div>
+                  <div role="textbox" aria-label="قالب البرومبت" style="min-height:110px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:12px 14px;font-size:14.5px;line-height:30px;color:var(--ab-on-surface)">
+                    <sc-for list="{{ s.segs }}" as="g" hint-placeholder-count="5"><sc-if value="{{ g.vv }}" hint-placeholder-val="{{ false }}"><span style="background:var(--ab-primary-container);color:var(--ab-on-primary-container);border-radius:6px;padding:2px 7px;font-size:13px;font-weight:500;white-space:nowrap"><i class="ph ph-brackets-curly" style="font-size:11px;vertical-align:-1px"></i> {{ g.vv }}</span></sc-if><sc-if value="{{ g.text }}" hint-placeholder-val="{{ true }}"><span>{{ g.text }}</span></sc-if></sc-for>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <span style="font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">المتغيرات <span style="font-weight:400;color:var(--ab-on-surface-low)">{{ s.meta }}</span></span>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <sc-for list="{{ s.vars }}" as="v" hint-placeholder-count="3">
+                      <span style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 6px 0 4px;border-radius:9999px;background:var(--ab-primary-container);color:var(--ab-on-primary-container);font-size:13px;font-weight:500">
+                        <i class="ph ph-brackets-curly" style="font-size:13px;margin-inline-start:6px"></i>{{ v }}
+                        <button title="إزالة المتغير" style="width:22px;height:22px;border:none;border-radius:9999px;background:transparent;color:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center" style-hover="background:rgba(0,0,0,.12)"><i class="ph ph-x" style="font-size:11px"></i></button>
+                      </span>
+                    </sc-for>
+                    <button style="height:32px;border-radius:9999px;border:1px dashed var(--ab-outline);background:transparent;padding:0 12px;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-family-base);font-size:13px;font-weight:500;color:var(--ab-on-surface-medium);cursor:pointer" style-hover="color:var(--ab-primary);border-color:var(--ab-primary)"><i class="ph ph-plus" style="font-size:13px"></i>إضافة متغير</button>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                  <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">المخرج المتوقع
+                    <textarea rows="3" defaultValue="{{ s.expected }}" style="border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:10px 14px;font-family:var(--font-family-base);font-size:14px;line-height:22px;color:var(--ab-on-surface);resize:vertical"></textarea>
+                  </label>
+                  <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">ملاحظات
+                    <textarea rows="3" defaultValue="{{ s.notes }}" placeholder="أضف ملاحظات لمن سيشغّل هذه الخطوة…" style="border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:10px 14px;font-family:var(--font-family-base);font-size:14px;line-height:22px;color:var(--ab-on-surface);resize:vertical"></textarea>
+                  </label>
+                </div>
+              </div>
+            </sc-if>
+          </article>
+        </sc-for>
+        <button style="height:52px;border-radius:14px;border:1.5px dashed var(--ab-outline);background:transparent;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-family-base);font-size:14.5px;font-weight:500;color:var(--ab-on-surface-medium);cursor:pointer" style-hover="color:var(--ab-primary);border-color:var(--ab-primary);background:var(--ab-surface-container-lowest)"><i class="ph ph-plus-circle" style="font-size:19px"></i>إضافة خطوة جديدة</button>
+      </div>
+      <aside style="background:var(--ab-surface-container-lowest);border:1px solid var(--ab-outline-variant);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px;position:sticky;top:92px">
+        <h2 style="margin:0;font-size:16px;font-weight:600;color:var(--ab-on-surface)">بيانات المسار</h2>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">اسم المسار
+          <input defaultValue="بناء تقرير تنفيذي" style="height:44px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:0 14px;font-family:var(--font-family-base);font-size:14.5px;color:var(--ab-on-surface)">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">الوصف
+          <textarea rows="3" defaultValue="مسار متكامل لتحويل المدخلات الأولية إلى تقرير تنفيذي منظم وقابل للتسليم." style="border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:10px 14px;font-family:var(--font-family-base);font-size:14px;line-height:22px;color:var(--ab-on-surface);resize:vertical"></textarea>
+        </label>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">التصنيف</span>
+          <button style="height:44px;border-radius:12px;border:1px solid var(--ab-outline-variant);background:var(--ab-surface);padding:0 14px;display:flex;align-items:center;gap:8px;font-family:var(--font-family-base);font-size:14.5px;color:var(--ab-on-surface);cursor:pointer" style-hover="background:var(--ab-surface-container-low)">التقارير<span style="flex:1"></span><i class="ph ph-caret-down" style="font-size:14px;color:var(--ab-on-surface-low)"></i></button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">الوسوم</span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;border:1px solid var(--ab-outline-variant);border-radius:12px;background:var(--ab-surface);padding:8px">
+            <span style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 4px 0 10px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium);font-size:12.5px">تنفيذي<button title="إزالة" style="width:18px;height:18px;border:none;border-radius:9999px;background:transparent;color:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-x" style="font-size:10px"></i></button></span>
+            <span style="display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 4px 0 10px;border-radius:9999px;background:var(--ab-surface-container);color:var(--ab-on-surface-medium);font-size:12.5px">تحليل<button title="إزالة" style="width:18px;height:18px;border:none;border-radius:9999px;background:transparent;color:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><i class="ph ph-x" style="font-size:10px"></i></button></span>
+            <input placeholder="أضف وسمًا…" style="border:none;background:transparent;flex:1;min-width:80px;font-family:var(--font-family-base);font-size:13px;color:var(--ab-on-surface);height:26px;box-shadow:none !important">
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:13px;font-weight:500;color:var(--ab-on-surface-medium)">الأيقونة</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ icons }}" as="ic" hint-placeholder-count="6">
+              <button onClick="{{ ic.pick }}" title="اختيار الأيقونة" style="width:40px;height:40px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;border:{{ ic.border }};background:{{ ic.bg }};color:{{ ic.fg }}"><i class="{{ ic.cls }}" style="font-size:19px"></i></button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid var(--ab-outline-variant);padding-top:16px">
+          <span style="flex:1;font-size:14px;color:var(--ab-on-surface)">إضافة إلى المفضلة</span>
+          <x-import component-from-global-scope="AbyanCapitalDesignSystem_019e26.Switch" default-checked="{{ true }}" hint-size="52px,32px"></x-import>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { open: 3, icon: 'file-text' };
+  renderVals() {
+    const nums = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    const ar = (n) => String(n).split('').map((d) => nums[+d]).join('');
+    const vmeta = (n) => n === 0 ? 'بدون متغيرات' : n === 1 ? 'متغير واحد' : n === 2 ? 'متغيران' : ar(n) + ' متغيرات';
+    const defs = [
+      { title: 'تحديد الهدف والجمهور', desc: 'توضيح الغرض من التقرير ومن سيقرؤه.', vars: ['اسم_الشركة', 'الجمهور_المستهدف', 'القرار_المتوقع'], segs: [{ text: 'حدّد هدف التقرير التنفيذي لشركة ' }, { vv: 'اسم_الشركة' }, { text: ' والجمهور المستهدف ' }, { vv: 'الجمهور_المستهدف' }, { text: '.' }], expected: 'فقرة تحدد الهدف والجمهور والقرار المرتبط.', notes: '' },
+      { title: 'جمع المدخلات', desc: 'حصر مصادر البيانات والمستندات اللازمة.', vars: ['موضوع_التقرير', 'المصادر_المتاحة'], segs: [{ text: 'اذكر قائمة بالمدخلات المطلوبة لإعداد تقرير عن ' }, { vv: 'موضوع_التقرير' }, { text: ' مع تصنيفها حسب الأولوية.' }], expected: 'قائمة مدخلات مصنفة حسب الأولوية.', notes: '' },
+      { title: 'تحديد هيكل التقرير', desc: 'بناء الأقسام والعناوين والترتيب المنطقي للتقرير.', vars: ['اسم_الشركة', 'الفترة_الزمنية', 'الجمهور_المستهدف'], segs: [{ text: 'أنشئ تقريرًا تنفيذيًا عن ' }, { vv: 'اسم_الشركة' }, { text: ' للفترة ' }, { vv: 'الفترة_الزمنية' }, { text: '، ويكون الجمهور المستهدف هو ' }, { vv: 'الجمهور_المستهدف' }, { text: '.' }], expected: 'هيكل من ٥–٧ أقسام رئيسية مع عناوين فرعية مقترحة لكل قسم.', notes: 'اعتمد الهيكل قبل الانتقال إلى الصياغة.' },
+      { title: 'استخراج النقاط الرئيسية', desc: 'تلخيص أهم النقاط من المدخلات.', vars: ['المدخلات', 'عدد_النقاط'], segs: [{ text: 'استخرج أهم ' }, { vv: 'عدد_النقاط' }, { text: ' نقاط من المدخلات التالية: ' }, { vv: 'المدخلات' }], expected: 'قائمة نقاط مرتبة حسب الأهمية.', notes: '' },
+      { title: '', desc: '', vars: [], error: true, segs: [{ text: '' }], expected: '', notes: '' },
+      { title: 'صياغة المسودة', desc: 'كتابة المسودة الأولى قسمًا بعد قسم.', vars: ['اسم_القسم', 'النقاط_الرئيسية', 'نبرة_الكتابة'], segs: [{ text: 'اكتب مسودة قسم ' }, { vv: 'اسم_القسم' }, { text: ' بنبرة ' }, { vv: 'نبرة_الكتابة' }, { text: '.' }], expected: 'مسودة قسم كاملة جاهزة للمراجعة.', notes: '' },
+      { title: 'تحسين الوضوح والأسلوب', desc: 'مراجعة الصياغة لرفع الوضوح وتوحيد النبرة.', vars: ['النص', 'نبرة_الكتابة'], segs: [{ text: 'أعد صياغة النص التالي ' }, { vv: 'النص' }, { text: ' لرفع الوضوح مع الحفاظ على نبرة ' }, { vv: 'نبرة_الكتابة' }, { text: '.' }], expected: 'نص محسّن بالنبرة نفسها.', notes: '' },
+      { title: 'كتابة الاستنتاجات والتوصيات', desc: 'صياغة خلاصة عملية وتوصيات مرتبة.', vars: ['التحليل', 'الجمهور_المستهدف'], segs: [{ text: 'اكتب استنتاجات وتوصيات بناءً على ' }, { vv: 'التحليل' }, { text: ' موجهة إلى ' }, { vv: 'الجمهور_المستهدف' }, { text: '.' }], expected: 'قائمة توصيات مرتبة حسب الأثر.', notes: '' },
+      { title: 'مراجعة الجودة', desc: 'فحص الدقة والاتساق واكتمال الأقسام.', vars: ['مسودة_التقرير'], segs: [{ text: 'راجع التقرير التالي ' }, { vv: 'مسودة_التقرير' }, { text: ' وأعد قائمة بالفجوات والتناقضات.' }], expected: 'قائمة ملاحظات جودة قابلة للمعالجة.', notes: '' },
+      { title: 'تجهيز النسخة النهائية', desc: 'إخراج النسخة النهائية القابلة للتسليم.', vars: ['عدد_الكلمات'], segs: [{ text: 'جهّز النسخة النهائية بملخص تنفيذي في ' }, { vv: 'عدد_الكلمات' }, { text: ' كلمة.' }], expected: 'نسخة نهائية جاهزة للمشاركة.', notes: '' },
+    ];
+    const steps = defs.map((d, i) => {
+      const n = i + 1, open = this.state.open === n, err = !!d.error;
+      return Object.assign({}, d, {
+        num: ar(n), open,
+        title: err ? 'خطوة بدون عنوان' : d.title,
+        titleFg: err ? 'var(--ab-danger)' : 'var(--ab-on-surface)',
+        meta: vmeta(d.vars.length),
+        error: err, noError: !err,
+        border: err ? '1.5px solid var(--ab-danger)' : open ? '1.5px solid var(--ab-primary)' : '1px solid var(--ab-outline-variant)',
+        numBg: open ? 'var(--ab-primary)' : 'var(--ab-surface-container)',
+        numFg: open ? '#fff' : 'var(--ab-on-surface-medium)',
+        caret: open ? 'ph ph-caret-up' : 'ph ph-caret-down',
+        toggle: () => this.setState((s) => ({ open: s.open === n ? 0 : n })),
+        stop: (e) => e.stopPropagation(),
+      });
+    });
+    const icons = ['file-text', 'chart-bar', 'presentation-chart', 'article', 'binoculars', 'lightbulb'].map((name) => {
+      const sel = this.state.icon === name;
+      return {
+        cls: (sel ? 'ph-fill' : 'ph') + ' ph-' + name,
+        border: sel ? '1.5px solid var(--ab-primary)' : '1px solid var(--ab-outline-variant)',
+        bg: sel ? 'var(--ab-primary-container)' : 'var(--ab-surface)',
+        fg: sel ? 'var(--ab-on-primary-container)' : 'var(--ab-on-surface-medium)',
+        pick: () => this.setState({ icon: name }),
+      };
+    });
+    return { steps, icons };
+  }
+}
+</script>
+</body>
+</html>
