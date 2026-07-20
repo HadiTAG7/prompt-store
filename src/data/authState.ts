@@ -3,7 +3,7 @@
  * الواجهة تقرأ منه دون استيراد حزمة firebase (تبقى في الحزمة الكسولة).
  * وحدة firebase تملأه وتسجّل الأفعال عند التهيئة.
  */
-export type AuthMode = 'local' | 'anonymous' | 'google';
+export type AuthMode = 'local' | 'anonymous' | 'signed-in';
 
 export interface AuthState {
   mode: AuthMode;
@@ -30,11 +30,21 @@ export const authStore = {
   },
 };
 
-export type GoogleSignInResult = 'linked' | 'switched';
+/**
+ * 'linked'   = رُقّي الحساب المجهول نفسه — المعرف والبيانات كما هي
+ * 'switched' = انتقال إلى حساب قائم (بياناته في السحابة) بعد دمج بيانات الزائر
+ */
+export type SignInResult = 'linked' | 'switched';
 
 export interface AuthActions {
-  /** ربط الحساب المجهول بـ Google (يحفظ البيانات) أو الانتقال لحساب Google قائم */
-  signInWithGoogle: () => Promise<GoogleSignInResult>;
+  /** إنشاء حساب بالبريد وكلمة المرور (يرقّي الزائر الحالي ويحفظ بياناته) */
+  emailSignUp: (email: string, password: string) => Promise<SignInResult>;
+  /** الدخول بحساب بريد قائم — تُدمج بيانات الزائر الحالي بالإضافة فقط */
+  emailSignIn: (email: string, password: string) => Promise<SignInResult>;
+  /** إرسال رابط إعادة تعيين كلمة المرور */
+  resetPassword: (email: string) => Promise<void>;
+  /** الدخول عبر Google (اختياري — يتطلب تفعيل المزوّد في الكونسول) */
+  signInWithGoogle: () => Promise<SignInResult>;
   signOutUser: () => Promise<void>;
 }
 

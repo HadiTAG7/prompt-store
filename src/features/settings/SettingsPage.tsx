@@ -2,17 +2,18 @@ import { useRef, useState, type ReactNode } from 'react';
 import {
   CloudCheck,
   DownloadSimple,
-  GoogleLogo,
   HardDrives,
   Moon,
   Sun,
   Monitor,
+  SignIn,
   SquaresFour,
   List,
   UploadSimple,
   WarningOctagon,
 } from '@phosphor-icons/react';
 import { Avatar } from '@/components/ui/Avatar';
+import { AuthDialog } from '@/features/auth/AuthDialog';
 import { useAuthState } from '@/hooks/useAuthState';
 import { useAccountControls } from '@/hooks/useAccountControls';
 import type { AppSettings } from '@/types';
@@ -80,7 +81,8 @@ function SegmentedChoice<T extends string>({
 
 function AccountSection() {
   const auth = useAuthState();
-  const { signIn, signOut, busy } = useAccountControls();
+  const { signOut } = useAccountControls();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   if (auth.mode === 'local') {
     return (
@@ -91,10 +93,13 @@ function AccountSection() {
     );
   }
 
-  if (auth.mode === 'google') {
+  if (auth.mode === 'signed-in') {
     return (
       <div className="flex items-center gap-3 flex-wrap">
-        <Avatar initials={(auth.displayName ?? auth.email ?? '؟').slice(0, 1)} src={auth.photoURL} />
+        <Avatar
+          initials={(auth.displayName ?? auth.email ?? '؟').slice(0, 1).toUpperCase()}
+          src={auth.photoURL}
+        />
         <span className="flex flex-col flex-1 min-w-[200px]">
           <span className="text-[14px] font-medium text-ink">{auth.displayName ?? 'حسابي'}</span>
           <span className="text-[12.5px] text-ink-low text-end" dir="ltr">
@@ -113,18 +118,15 @@ function AccountSection() {
     <div className="flex flex-col gap-3">
       <p className="m-0 text-[13.5px] leading-5 text-ink-medium">
         أنت الآن <strong>زائر</strong> — بياناتك محفوظة في السحابة لكنها مرتبطة بهذا المتصفح فقط.
-        سجّل الدخول عبر Google لتظهر مساراتك على كل أجهزتك، وستُنقل بيانات هذا الجهاز إلى حسابك
-        تلقائيًا.
+        أنشئ حسابًا بالبريد وكلمة المرور (أو عبر Google) لتظهر مساراتك على كل أجهزتك — بيانات
+        هذا الجهاز تُنقل إلى حسابك تلقائيًا.
       </p>
       <div>
-        <Button
-          leadingIcon={<GoogleLogo size={17} weight="bold" aria-hidden />}
-          disabled={busy}
-          onClick={() => void signIn()}
-        >
-          {busy ? 'جارٍ تسجيل الدخول…' : 'تسجيل الدخول عبر Google'}
+        <Button leadingIcon={<SignIn size={17} aria-hidden />} onClick={() => setDialogOpen(true)}>
+          تسجيل الدخول / إنشاء حساب
         </Button>
       </div>
+      <AuthDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
     </div>
   );
 }
