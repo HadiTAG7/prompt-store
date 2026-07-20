@@ -1,7 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import {
   Books,
-  CaretUpDown,
   FlowArrow,
   GearSix,
   Plus,
@@ -11,7 +10,6 @@ import {
   Tag,
 } from '@phosphor-icons/react';
 import type { Icon } from '@phosphor-icons/react';
-import { Avatar } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
 import { useWorkflows } from '@/hooks/useData';
 import { arabicNumber } from '@/lib/arabic';
@@ -77,23 +75,9 @@ export function AppLogo({ size = 32 }: { size?: 26 | 30 | 32 }) {
   );
 }
 
-export function UserCard({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        'flex items-center gap-3 py-2.5 px-3 rounded-md bg-surface hover:bg-container-low transition-colors duration-120',
-        className,
-      )}
-    >
-      <Avatar initials="س" />
-      <span className="flex flex-col flex-1 min-w-0">
-        <span className="text-[13.5px] font-medium text-ink">سارة العتيبي</span>
-        <span className="text-[12px] text-ink-low">فريق الاستشارات</span>
-      </span>
-      <CaretUpDown size={16} className="text-ink-low" aria-hidden />
-    </div>
-  );
-}
+import { UserCard } from './UserCard';
+
+export { UserCard };
 
 export function SidebarNavList({ onNavigate }: { onNavigate?: () => void }) {
   const { pathname } = useLocation();

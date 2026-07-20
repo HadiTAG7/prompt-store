@@ -2,6 +2,7 @@ import { useRef, useState, type ReactNode } from 'react';
 import {
   CloudCheck,
   DownloadSimple,
+  GoogleLogo,
   HardDrives,
   Moon,
   Sun,
@@ -11,6 +12,9 @@ import {
   UploadSimple,
   WarningOctagon,
 } from '@phosphor-icons/react';
+import { Avatar } from '@/components/ui/Avatar';
+import { useAuthState } from '@/hooks/useAuthState';
+import { useAccountControls } from '@/hooks/useAccountControls';
 import type { AppSettings } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Switch } from '@/components/ui/Switch';
@@ -70,6 +74,57 @@ function SegmentedChoice<T extends string>({
           </button>
         );
       })}
+    </div>
+  );
+}
+
+function AccountSection() {
+  const auth = useAuthState();
+  const { signIn, signOut, busy } = useAccountControls();
+
+  if (auth.mode === 'local') {
+    return (
+      <p className="m-0 text-[13.5px] leading-5 text-ink-medium">
+        التطبيق يعمل بالوضع المحلي — البيانات على هذا الجهاز فقط. عند تفعيل Firebase تظهر هنا
+        خيارات المزامنة عبر الأجهزة.
+      </p>
+    );
+  }
+
+  if (auth.mode === 'google') {
+    return (
+      <div className="flex items-center gap-3 flex-wrap">
+        <Avatar initials={(auth.displayName ?? auth.email ?? '؟').slice(0, 1)} src={auth.photoURL} />
+        <span className="flex flex-col flex-1 min-w-[200px]">
+          <span className="text-[14px] font-medium text-ink">{auth.displayName ?? 'حسابي'}</span>
+          <span className="text-[12.5px] text-ink-low text-end" dir="ltr">
+            {auth.email}
+          </span>
+        </span>
+        <span className="text-[12.5px] text-success">✓ بياناتك تتزامن عبر أجهزتك</span>
+        <Button variant="neutral" onClick={() => void signOut()}>
+          تسجيل الخروج
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="m-0 text-[13.5px] leading-5 text-ink-medium">
+        أنت الآن <strong>زائر</strong> — بياناتك محفوظة في السحابة لكنها مرتبطة بهذا المتصفح فقط.
+        سجّل الدخول عبر Google لتظهر مساراتك على كل أجهزتك، وستُنقل بيانات هذا الجهاز إلى حسابك
+        تلقائيًا.
+      </p>
+      <div>
+        <Button
+          leadingIcon={<GoogleLogo size={17} weight="bold" aria-hidden />}
+          disabled={busy}
+          onClick={() => void signIn()}
+        >
+          {busy ? 'جارٍ تسجيل الدخول…' : 'تسجيل الدخول عبر Google'}
+        </Button>
+      </div>
     </div>
   );
 }
@@ -175,6 +230,10 @@ export function SettingsPage() {
           إعدادات محلية تُحفظ على هذا الجهاز فقط.
         </p>
       </div>
+
+      <SettingsCard title="الحساب والمزامنة">
+        <AccountSection />
+      </SettingsCard>
 
       <SettingsCard title="المظهر">
         <SegmentedChoice

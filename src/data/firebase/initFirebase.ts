@@ -8,7 +8,9 @@ import {
 import type { AppRepositories } from '@/data/repositories/types';
 import { FirestoreAppRepositories } from '@/data/repositories/firestoreRepositories';
 import { CURRENT_SCHEMA_VERSION } from '@/data/storage/migrations';
+import { authStore, registerAuthActions } from '@/data/authState';
 import { readFirebaseConfig } from './config';
+import { createAuthActions } from './authService';
 
 /** انتظار جاهزية المصادقة ثم دخول مجهول إن لم يكن هناك مستخدم */
 function ensureUser(timeoutMs = 12_000): Promise<User> {
@@ -66,6 +68,21 @@ export async function initFirebaseRepositories(
 
   const user = await ensureUser();
   const cloud = new FirestoreAppRepositories(db, user.uid);
+
+  // نشر حالة المصادقة وأفعالها للواجهة (عبر مخزن مستقل عن firebase)
+  const applyUser = (current: User) =>
+    authStore.set({
+      mode: current.isAnonymous ? 'anonymous' : 'google',
+      uid: current.uid,
+      displayName: current.displayName ?? undefined,
+      email: current.email ?? undefined,
+      photoURL: current.photoURL ?? undefined,
+    });
+  applyUser(user);
+  onAuthStateChanged(getAuth(), (current) => {
+    if (current) applyUser(current);
+  });
+  registerAuthActions(createAuthActions(db));
 
   const meta = await cloud.getMeta();
   if (!meta) {

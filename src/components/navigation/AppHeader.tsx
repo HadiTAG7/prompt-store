@@ -6,7 +6,15 @@ import { DropdownMenu } from '@/components/ui/DropdownMenu';
 import { IconButton } from '@/components/ui/IconButton';
 import { SearchInput } from '@/components/ui/SearchInput';
 import { useSettings } from '@/hooks/useData';
+import { useAuthState } from '@/hooks/useAuthState';
 import { AppLogo } from './Sidebar';
+
+function AccountAvatar() {
+  const auth = useAuthState();
+  const initials =
+    auth.displayName?.slice(0, 1) ?? auth.email?.slice(0, 1) ?? (auth.mode === 'anonymous' ? 'ز' : 'م');
+  return <Avatar initials={initials} src={auth.photoURL} />;
+}
 
 /** ترويسة سطح المكتب — ٦٤ بكسل: بحث ٤٠٠ بكسل، إنشاء سريع، تبديل المظهر، قائمة المستخدم */
 export function AppHeader() {
@@ -74,7 +82,7 @@ export function AppHeader() {
             className="flex items-center gap-2 border-none bg-transparent p-1 rounded-full cursor-pointer hover:bg-container transition-colors duration-120"
             {...buttonProps}
           >
-            <Avatar initials="س" />
+            <AccountAvatar />
             <CaretDown size={14} className="text-ink-low" aria-hidden />
           </button>
         )}
@@ -105,7 +113,7 @@ export function MobileTopBar({ onOpenDrawer }: { onOpenDrawer: () => void }) {
         onClick={() => navigate('/settings')}
         className="border-none bg-transparent p-0 cursor-pointer"
       >
-        <Avatar initials="س" />
+        <AccountAvatar />
       </button>
     </header>
   );
